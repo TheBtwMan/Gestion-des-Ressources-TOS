@@ -1,0 +1,9 @@
+# Project Requirements
+
+## Backend
+- Java Development Kit (JDK) 17
+- Maven 3.x
+
+## Frontend
+- Node.js
+- Angular CLI
