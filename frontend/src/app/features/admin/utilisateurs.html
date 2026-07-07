@@ -1,0 +1,75 @@
+<div class="page-header">
+  <div>
+    <h1>Création des utilisateurs</h1>
+    <div class="subtitle">Chaque utilisateur doit avoir au moins un profil affecté</div>
+  </div>
+  <div class="actions">
+    <button class="btn btn-primary" (click)="openCreate()">+ Nouvel utilisateur</button>
+  </div>
+</div>
+
+<div class="table-wrap">
+  <table class="mm-table">
+    <thead><tr><th>Matricule</th><th>Nom</th><th>Prénom</th><th>Profils</th><th>Statut</th><th></th></tr></thead>
+    <tbody>
+      @for (u of utilisateurs(); track u.matricule) {
+        <tr>
+          <td>{{ u.matricule }}</td>
+          <td>{{ u.nom }}</td>
+          <td>{{ u.prenom }}</td>
+          <td>{{ u.profils.map(p => p.nom).join(', ') }}</td>
+          <td><span class="badge" [class.badge-green]="u.actif" [class.badge-red]="!u.actif">{{ u.actif ? 'Actif' : 'Désactivé' }}</span></td>
+          <td>
+            @if (u.actif) {
+              <button class="btn btn-danger btn-sm" (click)="desactiver(u.matricule)">Désactiver</button>
+            }
+          </td>
+        </tr>
+      } @empty {
+        <tr><td colspan="6" class="table-empty">Aucun utilisateur.</td></tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+@if (showCreate()) {
+  <div class="modal-backdrop" (click)="showCreate.set(false)">
+    <div class="modal-panel" (click)="$event.stopPropagation()">
+      <h3>Compte utilisateur</h3>
+      <div class="field-row">
+        <div class="field"><label>Matricule</label><input type="text" [(ngModel)]="matricule" /></div>
+        <div class="field">
+          <label>Terminal</label>
+          <select [(ngModel)]="terminalId">
+            @for (t of terminaux(); track t.id) { <option [ngValue]="t.id">{{ t.nom }}</option> }
+          </select>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Nom</label><input type="text" [(ngModel)]="nom" /></div>
+        <div class="field"><label>Prénom</label><input type="text" [(ngModel)]="prenom" /></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Mot de passe</label><input type="password" [(ngModel)]="motDePasse" /></div>
+        <div class="field"><label>Confirmer le mot de passe</label><input type="password" [(ngModel)]="confirmMotDePasse" /></div>
+      </div>
+
+      <div class="field">
+        <label>Profils affectés</label>
+        <div class="checkbox-group">
+          @for (p of profils(); track p.id) {
+            <label class="checkbox-option">
+              <input type="checkbox" [checked]="profilIds.has(p.id)" (change)="toggleProfil(p.id, $any($event.target).checked)" />
+              {{ p.nom }}
+            </label>
+          }
+        </div>
+      </div>
+
+      <div class="flex gap-8 justify-between mt-16">
+        <button class="btn btn-secondary" (click)="showCreate.set(false)">Annuler</button>
+        <button class="btn btn-primary" (click)="create()">Ajouter utilisateur</button>
+      </div>
+    </div>
+  </div>
+}

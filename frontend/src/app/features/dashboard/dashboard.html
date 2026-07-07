@@ -1,0 +1,115 @@
+<div class="page-header">
+  <div>
+    <h1>Dashboard de suivi</h1>
+    <div class="subtitle">Écarts prévisionnel / réalisé, absentéisme, arrêts — Opération Manutention</div>
+  </div>
+  <div class="actions">
+    <button class="btn btn-secondary" (click)="refresh()">↻ Actualiser</button>
+  </div>
+</div>
+
+@if (kpis(); as k) {
+  <div class="grid grid-4 mb-16">
+    <div class="stat-tile">
+      <div class="stat-label">Tonnage prévu</div>
+      <div class="stat-value">{{ k.tonnagePrevu | number }}</div>
+      <div class="stat-delta neutral">tonnes (commandes)</div>
+    </div>
+    <div class="stat-tile">
+      <div class="stat-label">Tonnage réalisé</div>
+      <div class="stat-value">{{ k.tonnageRealise | number }}</div>
+      <div class="stat-delta" [class.negative]="k.ecartPourcent < 0" [class.positive]="k.ecartPourcent >= 0">
+        {{ k.ecartPourcent >= 0 ? '+' : '' }}{{ k.ecartPourcent }}% vs prévu
+      </div>
+    </div>
+    <div class="stat-tile">
+      <div class="stat-label">Taux d'absentéisme</div>
+      <div class="stat-value">{{ k.tauxAbsenteismePourcent }}%</div>
+      <div class="stat-delta neutral">{{ k.nbAbsences }} absences · {{ k.effectifTotal }} agents</div>
+    </div>
+    <div class="stat-tile">
+      <div class="stat-label">Arrêts cumulés</div>
+      <div class="stat-value">{{ formatMinutes(k.dureeArretTotaleMinutes) }}</div>
+      <div class="stat-delta" [class.negative]="k.arretsEnCours > 0" [class.neutral]="k.arretsEnCours === 0">
+        {{ k.nbArrets }} arrêts · {{ k.arretsEnCours }} en cours
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Escales — {{ k.nbEscales }} au total</h3>
+      <div class="flex gap-16 flex-wrap">
+        @for (entry of statutEntries(); track entry[0]) {
+          <div class="flex-col gap-4" style="align-items:center;">
+            <span [class]="statutBadgeClass(entry[0])">{{ statutLabel(entry[0]) }}</span>
+            <strong style="font-size:20px;">{{ entry[1] }}</strong>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Commandes</h3>
+      <div class="stat-value">{{ k.nbCommandes }}</div>
+      <div class="text-sm text-muted mt-8">Toutes prestations Manutention confondues, période mock TOS (01–14 juillet 2026).</div>
+    </div>
+  </div>
+} @else {
+  <p class="text-muted">Chargement des indicateurs...</p>
+}
+
+<div class="card">
+  <h3>Tonnage prévu vs réalisé par trafic</h3>
+  @if (tonnageParTrafic().length === 0) {
+    <p class="table-empty">Aucune donnée.</p>
+  } @else {
+    <div class="flex gap-8 mb-8" style="font-size:11.5px;">
+      <span class="flex items-center gap-4"><span style="width:10px;height:10px;border-radius:2px;background:var(--mm-gray-200);display:inline-block;"></span> Prévu</span>
+      <span class="flex items-center gap-4"><span style="width:10px;height:10px;border-radius:2px;background:var(--mm-red);display:inline-block;"></span> Réalisé</span>
+    </div>
+    @for (row of tonnageParTrafic(); track row.trafic) {
+      <div class="bar-row">
+        <span>{{ row.trafic }}</span>
+        <div class="bar-track">
+          <div class="bar-fill" [class.over]="row.tonnageRealise > row.tonnagePrevu" [style.width.%]="barWidth(row.tonnageRealise)"></div>
+        </div>
+        <span class="text-sm">{{ row.tonnageRealise | number }} / {{ row.tonnagePrevu | number }}</span>
+      </div>
+    }
+  }
+</div>
+
+<div class="grid grid-2">
+  <div class="card">
+    <h3>Absences par équipe</h3>
+    @if (absenteisme().length === 0) {
+      <p class="table-empty">Aucune donnée.</p>
+    }
+    @for (row of absenteisme(); track row.equipeId) {
+      <div class="bar-row">
+        <span>{{ row.equipeId }} ({{ row.effectif }} agents)</span>
+        <div class="bar-track">
+          <div class="bar-fill" [style.width.%]="absenceWidth(row.nbAbsences)"></div>
+        </div>
+        <span class="text-sm">{{ row.nbAbsences }}</span>
+      </div>
+    }
+  </div>
+
+  <div class="card">
+    <h3>Arrêts par équipement</h3>
+    @if (arretsParEquipement().length === 0) {
+      <p class="table-empty">Aucune donnée.</p>
+    }
+    @for (row of arretsParEquipement().slice(0, 8); track row.equipementCode) {
+      <div class="bar-row">
+        <span>{{ row.equipementCode }}</span>
+        <div class="bar-track">
+          <div class="bar-fill" [style.width.%]="dureeWidth(row.dureeTotaleMinutes)"></div>
+        </div>
+        <span class="text-sm">{{ formatMinutes(row.dureeTotaleMinutes) }}</span>
+      </div>
+    }
+  </div>
+</div>

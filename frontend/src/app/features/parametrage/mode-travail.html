@@ -1,0 +1,53 @@
+<div class="page-header">
+  <div>
+    <h1>Mode de travail</h1>
+    <div class="subtitle">Opération Manutention — organisation du travail par terminal</div>
+  </div>
+</div>
+
+<div class="card" style="max-width:520px;">
+  <div class="field">
+    <label>Terminal</label>
+    <select (change)="onTerminalChange($any($event.target).value)">
+      @for (t of terminaux(); track t.id) {
+        <option [value]="t.id">{{ t.nom }}</option>
+      }
+    </select>
+  </div>
+
+  @if (saved()) {
+    <div class="alert alert-success">Mode de travail enregistré.</div>
+  }
+
+  <div class="field">
+    <label>Semaine</label>
+    <div class="radio-group">
+      <label class="radio-option">
+        <input type="radio" name="semaine" value="SIX_SUR_SEPT" [checked]="semaine() === 'SIX_SUR_SEPT'" (change)="semaine.set('SIX_SUR_SEPT')" />
+        6/7 jours
+      </label>
+      <label class="radio-option">
+        <input type="radio" name="semaine" value="SEPT_SUR_SEPT" [checked]="semaine() === 'SEPT_SUR_SEPT'" (change)="semaine.set('SEPT_SUR_SEPT')" />
+        7/7 jours
+      </label>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Jour</label>
+    <div class="radio-group">
+      <label class="radio-option">
+        <input type="radio" name="jour" value="DEUX_SHIFTS" [checked]="jour() === 'DEUX_SHIFTS'" (change)="jour.set('DEUX_SHIFTS')" />
+        2/3 shifts
+      </label>
+      <label class="radio-option">
+        <input type="radio" name="jour" value="TROIS_SHIFTS" [checked]="jour() === 'TROIS_SHIFTS'" (change)="jour.set('TROIS_SHIFTS')" />
+        3/3 shifts
+      </label>
+    </div>
+  </div>
+
+  <div class="flex gap-8 mt-16">
+    <button class="btn btn-primary" (click)="save()">Valider</button>
+  </div>
+</div>

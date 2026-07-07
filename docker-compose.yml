@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: marsa-gestion-ressources-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: gestion_ressources
+      POSTGRES_USER: marsa
+      POSTGRES_PASSWORD: marsa
+    ports:
+      - "5432:5432"
+    volumes:
+      - marsa-pg-data:/var/lib/postgresql/data
+
+volumes:
+  marsa-pg-data:

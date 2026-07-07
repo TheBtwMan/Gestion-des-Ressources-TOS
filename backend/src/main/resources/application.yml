@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: tos
+  datasource:
+    url: jdbc:postgresql://localhost:5432/gestion_ressources
+    username: marsa
+    password: marsa
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: true
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          time_zone: UTC
+    show-sql: false
+  jackson:
+    date-format: yyyy-MM-dd'T'HH:mm:ss
+    time-zone: UTC
+
+server:
+  port: 8080
+
+marsa:
+  jwt:
+    secret: "ChangeMeMarsaMarocGestionDesRessourcesSecretKeyForJwtSigningHS256"
+    expiration-ms: 28800000 # 8h
+  seed:
+    enabled: true
+    mock-data-path: classpath:mock/mock-tos-data-marsa-maroc.json
+
+logging:
+  level:
+    com.marsa.tos: INFO

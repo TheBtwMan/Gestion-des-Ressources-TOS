@@ -1,0 +1,49 @@
+<div class="app-shell">
+  <aside class="app-sidebar">
+    <div class="brand"><span class="brand-mark">◆</span> Marsa Maroc</div>
+
+    <div class="nav-section-title">Reporting</div>
+    @for (item of reporting; track item.path) {
+      <a class="nav-link" [routerLink]="item.path" routerLinkActive="active">
+        <span>{{ item.icon }}</span> {{ item.label }}
+      </a>
+    }
+
+    <div class="nav-section-title">Paramétrages</div>
+    @for (item of parametrage; track item.path) {
+      <a class="nav-link" [routerLink]="item.path" routerLinkActive="active">
+        <span>{{ item.icon }}</span> {{ item.label }}
+      </a>
+    }
+
+    <div class="nav-section-title">Exploitation</div>
+    @for (item of exploitation; track item.path) {
+      <a class="nav-link" [routerLink]="item.path" routerLinkActive="active">
+        <span>{{ item.icon }}</span> {{ item.label }}
+      </a>
+    }
+
+    <div class="nav-section-title">Administration</div>
+    @for (item of administration; track item.path) {
+      <a class="nav-link" [routerLink]="item.path" routerLinkActive="active">
+        <span>{{ item.icon }}</span> {{ item.label }}
+      </a>
+    }
+  </aside>
+
+  <header class="app-topbar">
+    <div class="breadcrumb">Gestion des ressources · Opération Manutention</div>
+    <div class="user-chip">
+      <div class="flex-col" style="align-items:flex-end;">
+        <strong style="font-size:13px;">{{ auth.displayName() }}</strong>
+        <span class="text-sm text-muted">{{ auth.session()?.profils?.join(', ') }}</span>
+      </div>
+      <div class="avatar">{{ initiales() }}</div>
+      <button class="btn btn-ghost btn-sm" (click)="logout()">Déconnexion</button>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <router-outlet />
+  </main>
+</div>

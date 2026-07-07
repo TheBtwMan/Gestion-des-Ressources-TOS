@@ -1,0 +1,112 @@
+<div class="page-header">
+  <div>
+    <h1>Main théorique</h1>
+    <div class="subtitle">Ressources humaines et matérielles théoriques par trafic et par terminal</div>
+  </div>
+  <div class="actions">
+    <button class="btn btn-primary" (click)="openCreate()">+ Nouvelle main théorique</button>
+  </div>
+</div>
+
+<div class="table-wrap">
+  <table class="mm-table">
+    <thead><tr><th>Nom</th><th>Trafic</th><th>Terminal</th><th>Ress. humaines</th><th>Ress. matérielles</th><th>Accessoires</th><th></th></tr></thead>
+    <tbody>
+      @for (m of mains(); track m.id) {
+        <tr>
+          <td>{{ m.nom }}</td>
+          <td>{{ m.trafic.nom }}</td>
+          <td>{{ m.terminal.nom }}</td>
+          <td>{{ m.ressourcesHumaines.length }}</td>
+          <td>{{ m.ressourcesMaterielles.length }}</td>
+          <td>{{ m.accessoires.length }}</td>
+          <td><button class="btn btn-danger btn-sm" (click)="remove(m.id)">Supprimer</button></td>
+        </tr>
+      } @empty {
+        <tr><td colspan="7" class="table-empty">Aucune main théorique.</td></tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+@if (showCreate()) {
+  <div class="modal-backdrop" (click)="showCreate.set(false)">
+    <div class="modal-panel" style="max-width:760px;" (click)="$event.stopPropagation()">
+      <h3>Nouvelle main théorique</h3>
+
+      <div class="field-row">
+        <div class="field"><label>Nom de la main</label><input type="text" [(ngModel)]="nom" /></div>
+        <div class="field">
+          <label>Trafic</label>
+          <select [(ngModel)]="traficId">
+            @for (t of trafics(); track t.id) { <option [ngValue]="t.id">{{ t.nom }}</option> }
+          </select>
+        </div>
+        <div class="field">
+          <label>Terminal</label>
+          <select [(ngModel)]="terminalId">
+            @for (t of terminaux(); track t.id) { <option [ngValue]="t.id">{{ t.nom }}</option> }
+          </select>
+        </div>
+      </div>
+
+      <h3 class="text-sm mt-16" style="text-transform:uppercase;color:var(--mm-gray-500);">Ressources humaines</h3>
+      @for (row of rhRows; track $index) {
+        <div class="field-row items-center">
+          <div class="field" style="flex:1.4;">
+            <label>Fonction</label>
+            <select [(ngModel)]="row.fonctionId">
+              <option [ngValue]="null">—</option>
+              @for (f of fonctions(); track f.id) { <option [ngValue]="f.id">{{ f.libelle }}</option> }
+            </select>
+          </div>
+          <div class="field" style="max-width:90px;"><label>Nombre</label><input type="number" min="0" [(ngModel)]="row.nombreTotal" /></div>
+          <div class="field" style="max-width:130px;">
+            <label>Emplacement</label>
+            <select [(ngModel)]="row.emplacement">
+              <option value="BORD">Bord</option>
+              <option value="QUAI">Quai</option>
+              <option value="ARRIERE">Arrière</option>
+            </select>
+          </div>
+          <div class="field" style="max-width:90px;"><label>Max</label><input type="number" min="0" [(ngModel)]="row.maxNombre" /></div>
+          <div class="field" style="max-width:110px;">
+            <label class="checkbox-option" style="margin-top:8px;"><input type="checkbox" [(ngModel)]="row.maxObligatoire" /> Obligatoire</label>
+          </div>
+          <button class="btn btn-ghost btn-icon" (click)="removeRhRow($index)">✕</button>
+        </div>
+      }
+      <button class="btn btn-secondary btn-sm" (click)="addRhRow()">+ Ajouter une fonction</button>
+
+      <h3 class="text-sm mt-16" style="text-transform:uppercase;color:var(--mm-gray-500);">Ressources matérielles</h3>
+      @for (row of materielRows; track $index) {
+        <div class="field-row items-center">
+          <div class="field" style="flex:1;">
+            <label>Famille d'équipement</label>
+            <select [(ngModel)]="row.familleId">
+              <option [ngValue]="null">—</option>
+              @for (f of familles(); track f.id) { <option [ngValue]="f.id">{{ f.nom }}</option> }
+            </select>
+          </div>
+          <button class="btn btn-ghost btn-icon" (click)="removeMaterielRow($index)">✕</button>
+        </div>
+      }
+      <button class="btn btn-secondary btn-sm" (click)="addMaterielRow()">+ Ajouter un équipement</button>
+
+      <h3 class="text-sm mt-16" style="text-transform:uppercase;color:var(--mm-gray-500);">Accessoires</h3>
+      <div class="checkbox-group">
+        @for (a of accessoires(); track a.id) {
+          <label class="checkbox-option">
+            <input type="checkbox" [checked]="accessoireIds.has(a.id)" (change)="toggleAccessoire(a.id, $any($event.target).checked)" />
+            {{ a.nom }}
+          </label>
+        }
+      </div>
+
+      <div class="flex gap-8 justify-between mt-16">
+        <button class="btn btn-secondary" (click)="showCreate.set(false)">Annuler</button>
+        <button class="btn btn-primary" (click)="save()">Confirmer</button>
+      </div>
+    </div>
+  </div>
+}

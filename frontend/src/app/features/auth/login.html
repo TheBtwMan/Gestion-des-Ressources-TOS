@@ -1,0 +1,24 @@
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="brand"><span class="brand-mark" style="color: var(--mm-red);">◆</span> Marsa Maroc</div>
+    <div class="subtitle">Gestion des ressources — Authentification</div>
+
+    @if (error()) {
+      <div class="alert alert-error">{{ error() }}</div>
+    }
+
+    <form (ngSubmit)="submit()">
+      <div class="field">
+        <label for="matricule">Matricule</label>
+        <input id="matricule" type="text" name="matricule" [(ngModel)]="matricule" autocomplete="username" placeholder="ex. ADMIN001" />
+      </div>
+      <div class="field">
+        <label for="password">Mot de passe</label>
+        <input id="password" type="password" name="password" [(ngModel)]="motDePasse" autocomplete="current-password" />
+      </div>
+      <button class="btn btn-primary" style="width:100%; justify-content:center;" type="submit" [disabled]="loading()">
+        {{ loading() ? 'Connexion...' : 'Se connecter' }}
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,2077 @@
+{
+  "_meta": {
+    "description": "Mock data réaliste simulant les données TOS / interface Trafic pour l'opération Manutention - Marsa Maroc",
+    "port": "Port de Casablanca",
+    "perimetre": "Opération Manutention",
+    "periodeCouverte": "2026-07-01 au 2026-07-14",
+    "volumes": {
+      "escales": 32,
+      "commandes": 41,
+      "shifts": 42,
+      "arrets": 22,
+      "absences": 28,
+      "personnel": 40,
+      "equipes": 4,
+      "equipements": 16
+    }
+  },
+  "terminaux": [
+    "TC1",
+    "TC3",
+    "TC4",
+    "TPS (Terminal Polyvalent Sud)",
+    "Terminal Roulier (Ro-Ro)",
+    "Terminal Vraquiers"
+  ],
+  "equipements": [
+    {
+      "id": "GRUE-01",
+      "type": "Grue mobile"
+    },
+    {
+      "id": "GRUE-02",
+      "type": "Grue mobile"
+    },
+    {
+      "id": "GRUE-05",
+      "type": "Grue mobile"
+    },
+    {
+      "id": "PORTIQUE-01",
+      "type": "Portique"
+    },
+    {
+      "id": "PORTIQUE-02",
+      "type": "Portique"
+    },
+    {
+      "id": "PORTIQUE-03",
+      "type": "Portique"
+    },
+    {
+      "id": "CHARIOT-08",
+      "type": "Chariot élévateur"
+    },
+    {
+      "id": "CHARIOT-12",
+      "type": "Chariot élévateur"
+    },
+    {
+      "id": "CHARIOT-15",
+      "type": "Chariot élévateur"
+    },
+    {
+      "id": "SAUTERELLE-03",
+      "type": "Sauterelle"
+    },
+    {
+      "id": "CHARGEUSE-04",
+      "type": "Chargeuse"
+    },
+    {
+      "id": "CHARGEUSE-06",
+      "type": "Chargeuse"
+    },
+    {
+      "id": "TRACTEUR-RORO-01",
+      "type": "Tracteur RoRo"
+    },
+    {
+      "id": "TRACTEUR-RORO-02",
+      "type": "Tracteur RoRo"
+    },
+    {
+      "id": "BANDE-CONV-01",
+      "type": "Bande de convoyage"
+    },
+    {
+      "id": "BANDE-CONV-02",
+      "type": "Bande de convoyage"
+    }
+  ],
+  "personnel": [
+    {
+      "matricule": "MP-10001",
+      "nom": "El Amrani Souad",
+      "fonction": "Grutier",
+      "equipe": "EQ-1"
+    },
+    {
+      "matricule": "MP-10008",
+      "nom": "Idrissi Rachid",
+      "fonction": "Docker",
+      "equipe": "EQ-2"
+    },
+    {
+      "matricule": "MP-10022",
+      "nom": "Fassi Anas",
+      "fonction": "Grutier",
+      "equipe": "EQ-3"
+    },
+    {
+      "matricule": "MP-10031",
+      "nom": "El Amrani Amina",
+      "fonction": "Chef d'équipe",
+      "equipe": "EQ-4"
+    },
+    {
+      "matricule": "MP-10037",
+      "nom": "El Amrani Zineb",
+      "fonction": "Docker",
+      "equipe": "EQ-1"
+    },
+    {
+      "matricule": "MP-10043",
+      "nom": "Idrissi Bilal",
+      "fonction": "Signaleur",
+      "equipe": "EQ-2"
+    },
+    {
+      "matricule": "MP-10055",
+      "nom": "El Amrani Nabil",
+      "fonction": "Élingueur",
+      "equipe": "EQ-3"
+    },
+    {
+      "matricule": "MP-10069",
+      "nom": "Ouazzani Omar",
+      "fonction": "Signaleur",
+      "equipe": "EQ-4"
+    },
+    {
+      "matricule": "MP-10074",
+      "nom": "Ouazzani Fatima-Zahra",
+      "fonction": "Docker",
+      "equipe": "EQ-1"
+    },
+    {
+      "matricule": "MP-10078",
+      "nom": "Tazi Sanae",
+      "fonction": "Signaleur",
+      "equipe": "EQ-2"
+    },
+    {
+      "matricule": "MP-10086",
+      "nom": "Benali Souad",
+      "fonction": "Élingueur",
+      "equipe": "EQ-3"
+    },
+    {
+      "matricule": "MP-10096",
+      "nom": "Kabbaj Amina",
+      "fonction": "Grutier",
+      "equipe": "EQ-4"
+    },
+    {
+      "matricule": "MP-10107",
+      "nom": "Ziani Anas",
+      "fonction": "Élingueur",
+      "equipe": "EQ-1"
+    },
+    {
+      "matricule": "MP-10113",
+      "nom": "Benali Ghita",
+      "fonction": "Grutier",
+      "equipe": "EQ-2"
+    },
+    {
+      "matricule": "MP-10119",
+      "nom": "Fassi Salma",
+      "fonction": "Élingueur",
+      "equipe": "EQ-3"
+    },
+    {
+      "matricule": "MP-10123",
+      "nom": "Berrada Bilal",
+      "fonction": "Signaleur",
+      "equipe": "EQ-4"
+    },
+    {
+      "matricule": "MP-10136",
+      "nom": "Bennani Sanae",
+      "fonction": "Opérateur chariot élévateur",
+      "equipe": "EQ-1"
+    },
+    {
+      "matricule": "MP-10144",
+      "nom": "Berrada Tarik",
+      "fonction": "Docker",
+      "equipe": "EQ-2"
+    },
+    {
+      "matricule": "MP-10157",
+      "nom": "Bennani Zineb",
+      "fonction": "Grutier",
+      "equipe": "EQ-3"
+    },
+    {
+      "matricule": "MP-10171",
+      "nom": "Bennani Bilal",
+      "fonction": "Docker",
+      "equipe": "EQ-4"
+    },
+    {
+      "matricule": "MP-10180",
+      "nom": "Idrissi Ghita",
+      "fonction": "Élingueur",
+      "equipe": "EQ-1"
+    },
+    {
+      "matricule": "MP-10188",
+      "nom": "Idrissi Karim",
+      "fonction": "Chef d'équipe",
+      "equipe": "EQ-2"
+    },
+    {
+      "matricule": "MP-10203",
+      "nom": "Kabbaj Omar",
+      "fonction": "Opérateur chariot élévateur",
+      "equipe": "EQ-3"
+    },
+    {
+      "matricule": "MP-10207",
+      "nom": "Ouazzani Hicham",
+      "fonction": "Docker",
+      "equipe": "EQ-4"
+    },
+    {
+      "matricule": "MP-10220",
+      "nom": "Kabbaj Younes",
+      "fonction": "Conducteur d'engin RoRo",
+      "equipe": "EQ-1"
+    },
+    {
+      "matricule": "MP-10230",
+      "nom": "Berrada Rachid",
+      "fonction": "Pointeur",
+      "equipe": "EQ-2"
+    },
+    {
+      "matricule": "MP-10236",
+      "nom": "Sekkat Anas",
+      "fonction": "Élingueur",
+      "equipe": "EQ-3"
+    },
+    {
+      "matricule": "MP-10245",
+      "nom": "Idrissi Rachid",
+      "fonction": "Opérateur chariot élévateur",
+      "equipe": "EQ-4"
+    },
+    {
+      "matricule": "MP-10256",
+      "nom": "Fassi Karim",
+      "fonction": "Conducteur d'engin RoRo",
+      "equipe": "EQ-1"
+    },
+    {
+      "matricule": "MP-10260",
+      "nom": "Bennani Ghita",
+      "fonction": "Pointeur",
+      "equipe": "EQ-2"
+    },
+    {
+      "matricule": "MP-10269",
+      "nom": "Kabbaj Hamza",
+      "fonction": "Grutier",
+      "equipe": "EQ-3"
+    },
+    {
+      "matricule": "MP-10281",
+      "nom": "Berrada Zineb",
+      "fonction": "Conducteur d'engin RoRo",
+      "equipe": "EQ-4"
+    },
+    {
+      "matricule": "MP-10284",
+      "nom": "Berrada Younes",
+      "fonction": "Grutier",
+      "equipe": "EQ-1"
+    },
+    {
+      "matricule": "MP-10292",
+      "nom": "Lahlou Laila",
+      "fonction": "Grutier",
+      "equipe": "EQ-2"
+    },
+    {
+      "matricule": "MP-10297",
+      "nom": "El Amrani Souad",
+      "fonction": "Conducteur d'engin RoRo",
+      "equipe": "EQ-3"
+    },
+    {
+      "matricule": "MP-10311",
+      "nom": "Bennani Adil",
+      "fonction": "Élingueur",
+      "equipe": "EQ-4"
+    },
+    {
+      "matricule": "MP-10315",
+      "nom": "Chraibi Rachid",
+      "fonction": "Élingueur",
+      "equipe": "EQ-1"
+    },
+    {
+      "matricule": "MP-10323",
+      "nom": "El Amrani Imane",
+      "fonction": "Pointeur",
+      "equipe": "EQ-2"
+    },
+    {
+      "matricule": "MP-10331",
+      "nom": "El Amrani Fatima-Zahra",
+      "fonction": "Conducteur d'engin RoRo",
+      "equipe": "EQ-3"
+    },
+    {
+      "matricule": "MP-10339",
+      "nom": "Idrissi Karim",
+      "fonction": "Élingueur",
+      "equipe": "EQ-4"
+    }
+  ],
+  "equipes": [
+    {
+      "id": "EQ-1",
+      "nom": "Équipe 1",
+      "responsable": "MP-10256",
+      "effectif": 10,
+      "membres": [
+        "MP-10001",
+        "MP-10037",
+        "MP-10074",
+        "MP-10107",
+        "MP-10136",
+        "MP-10180",
+        "MP-10220",
+        "MP-10256",
+        "MP-10284",
+        "MP-10315"
+      ]
+    },
+    {
+      "id": "EQ-2",
+      "nom": "Équipe 2",
+      "responsable": "MP-10292",
+      "effectif": 10,
+      "membres": [
+        "MP-10008",
+        "MP-10043",
+        "MP-10078",
+        "MP-10113",
+        "MP-10144",
+        "MP-10188",
+        "MP-10230",
+        "MP-10260",
+        "MP-10292",
+        "MP-10323"
+      ]
+    },
+    {
+      "id": "EQ-3",
+      "nom": "Équipe 3",
+      "responsable": "MP-10022",
+      "effectif": 10,
+      "membres": [
+        "MP-10022",
+        "MP-10055",
+        "MP-10086",
+        "MP-10119",
+        "MP-10157",
+        "MP-10203",
+        "MP-10236",
+        "MP-10269",
+        "MP-10297",
+        "MP-10331"
+      ]
+    },
+    {
+      "id": "EQ-4",
+      "nom": "Équipe 4",
+      "responsable": "MP-10339",
+      "effectif": 10,
+      "membres": [
+        "MP-10031",
+        "MP-10069",
+        "MP-10096",
+        "MP-10123",
+        "MP-10171",
+        "MP-10207",
+        "MP-10245",
+        "MP-10281",
+        "MP-10311",
+        "MP-10339"
+      ]
+    }
+  ],
+  "shifts": [
+    {
+      "id": "SHIFT-01-07-1",
+      "date": "2026-07-01",
+      "periode": "06h45-14h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-01-07-2",
+      "date": "2026-07-01",
+      "periode": "14h45-22h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-01-07-3",
+      "date": "2026-07-01",
+      "periode": "22h45-06h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-02-07-1",
+      "date": "2026-07-02",
+      "periode": "06h45-14h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-02-07-2",
+      "date": "2026-07-02",
+      "periode": "14h45-22h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-02-07-3",
+      "date": "2026-07-02",
+      "periode": "22h45-06h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-03-07-1",
+      "date": "2026-07-03",
+      "periode": "06h45-14h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-03-07-2",
+      "date": "2026-07-03",
+      "periode": "14h45-22h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-03-07-3",
+      "date": "2026-07-03",
+      "periode": "22h45-06h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-04-07-1",
+      "date": "2026-07-04",
+      "periode": "06h45-14h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-04-07-2",
+      "date": "2026-07-04",
+      "periode": "14h45-22h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-04-07-3",
+      "date": "2026-07-04",
+      "periode": "22h45-06h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-05-07-1",
+      "date": "2026-07-05",
+      "periode": "06h45-14h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-05-07-2",
+      "date": "2026-07-05",
+      "periode": "14h45-22h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-05-07-3",
+      "date": "2026-07-05",
+      "periode": "22h45-06h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-06-07-1",
+      "date": "2026-07-06",
+      "periode": "06h45-14h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-06-07-2",
+      "date": "2026-07-06",
+      "periode": "14h45-22h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-06-07-3",
+      "date": "2026-07-06",
+      "periode": "22h45-06h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-07-07-1",
+      "date": "2026-07-07",
+      "periode": "06h45-14h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-07-07-2",
+      "date": "2026-07-07",
+      "periode": "14h45-22h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-07-07-3",
+      "date": "2026-07-07",
+      "periode": "22h45-06h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-08-07-1",
+      "date": "2026-07-08",
+      "periode": "06h45-14h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-08-07-2",
+      "date": "2026-07-08",
+      "periode": "14h45-22h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-08-07-3",
+      "date": "2026-07-08",
+      "periode": "22h45-06h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-09-07-1",
+      "date": "2026-07-09",
+      "periode": "06h45-14h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-09-07-2",
+      "date": "2026-07-09",
+      "periode": "14h45-22h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-09-07-3",
+      "date": "2026-07-09",
+      "periode": "22h45-06h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-10-07-1",
+      "date": "2026-07-10",
+      "periode": "06h45-14h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-10-07-2",
+      "date": "2026-07-10",
+      "periode": "14h45-22h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-10-07-3",
+      "date": "2026-07-10",
+      "periode": "22h45-06h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-11-07-1",
+      "date": "2026-07-11",
+      "periode": "06h45-14h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-11-07-2",
+      "date": "2026-07-11",
+      "periode": "14h45-22h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-11-07-3",
+      "date": "2026-07-11",
+      "periode": "22h45-06h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-12-07-1",
+      "date": "2026-07-12",
+      "periode": "06h45-14h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-12-07-2",
+      "date": "2026-07-12",
+      "periode": "14h45-22h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-12-07-3",
+      "date": "2026-07-12",
+      "periode": "22h45-06h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-13-07-1",
+      "date": "2026-07-13",
+      "periode": "06h45-14h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-13-07-2",
+      "date": "2026-07-13",
+      "periode": "14h45-22h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-13-07-3",
+      "date": "2026-07-13",
+      "periode": "22h45-06h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-14-07-1",
+      "date": "2026-07-14",
+      "periode": "06h45-14h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-14-07-2",
+      "date": "2026-07-14",
+      "periode": "14h45-22h45",
+      "type": "NORMAL"
+    },
+    {
+      "id": "SHIFT-14-07-3",
+      "date": "2026-07-14",
+      "periode": "22h45-06h45",
+      "type": "NORMAL"
+    }
+  ],
+  "escales": [
+    {
+      "id": "ESC-2026-0142",
+      "navire": "CMA CGM MEDAS",
+      "compagnie": "CMA CGM",
+      "port": "Casablanca",
+      "terminal": "Terminal Vraquiers",
+      "dateArriveePrevue": "2026-07-07T09:37:44",
+      "dateArriveeReelle": "2026-07-07T09:33:44.488397",
+      "dateDepartPrevue": "2026-07-09T13:37:44",
+      "statut": "EN_COURS"
+    },
+    {
+      "id": "ESC-2026-0143",
+      "navire": "MAERSK AGADIR",
+      "compagnie": "Maersk",
+      "port": "Casablanca",
+      "terminal": "TPS (Terminal Polyvalent Sud)",
+      "dateArriveePrevue": "2026-07-13T12:25:00",
+      "dateArriveeReelle": null,
+      "dateDepartPrevue": "2026-07-14T22:25:00",
+      "statut": "PREVU"
+    },
+    {
+      "id": "ESC-2026-0144",
+      "navire": "HAPAG TANGIER MED",
+      "compagnie": "Hapag-Lloyd",
+      "port": "Casablanca",
+      "terminal": "Terminal Roulier (Ro-Ro)",
+      "dateArriveePrevue": "2026-07-11T17:38:33",
+      "dateArriveeReelle": null,
+      "dateDepartPrevue": "2026-07-12T23:38:33",
+      "statut": "PREVU"
+    },
+    {
+      "id": "ESC-2026-0145",
+      "navire": "COMANAV RABAT",
+      "compagnie": "Comanav",
+      "port": "Casablanca",
+      "terminal": "Terminal Vraquiers",
+      "dateArriveePrevue": "2026-07-10T00:45:43",
+      "dateArriveeReelle": null,
+      "dateDepartPrevue": "2026-07-12T03:45:43",
+      "statut": "PREVU"
+    },
+    {
+      "id": "ESC-2026-0146",
+      "navire": "BOURBON SAFI",
+      "compagnie": "Bourbon Maroc",
+      "port": "Casablanca",
+      "terminal": "TC3",
+      "dateArriveePrevue": "2026-07-04T08:06:20",
+      "dateArriveeReelle": "2026-07-04T08:15:20.048954",
+      "dateDepartPrevue": "2026-07-05T03:06:20",
+      "statut": "CLOTUREE"
+    },
+    {
+      "id": "ESC-2026-0147",
+      "navire": "GRIMALDI TANGER",
+      "compagnie": "Grimaldi Lines",
+      "port": "Casablanca",
+      "terminal": "TC1",
+      "dateArriveePrevue": "2026-07-10T05:50:46",
+      "dateArriveeReelle": null,
+      "dateDepartPrevue": "2026-07-11T13:50:46",
+      "statut": "PREVU"
+    },
+    {
+      "id": "ESC-2026-0148",
+      "navire": "CMA CGM MEDAS",
+      "compagnie": "CMA CGM",
+      "port": "Casablanca",
+      "terminal": "TC4",
+      "dateArriveePrevue": "2026-07-02T05:06:26",
+      "dateArriveeReelle": "2026-07-02T05:48:26.975395",
+      "dateDepartPrevue": "2026-07-03T16:06:26",
+      "statut": "CLOTUREE"
+    },
+    {
+      "id": "ESC-2026-0149",
+      "navire": "GRIMALDI FES",
+      "compagnie": "Grimaldi Lines",
+      "port": "Casablanca",
+      "terminal": "TC3",
+      "dateArriveePrevue": "2026-07-11T03:41:09",
+      "dateArriveeReelle": null,
+      "dateDepartPrevue": "2026-07-13T09:41:09",
+      "statut": "PREVU"
+    },
+    {
+      "id": "ESC-2026-0150",
+      "navire": "BOURBON SAFI",
+      "compagnie": "Bourbon Maroc",
+      "port": "Casablanca",
+      "terminal": "TPS (Terminal Polyvalent Sud)",
+      "dateArriveePrevue": "2026-07-11T17:56:20",
+      "dateArriveeReelle": null,
+      "dateDepartPrevue": "2026-07-12T17:56:20",
+      "statut": "PREVU"
+    },
+    {
+      "id": "ESC-2026-0151",
+      "navire": "CMA CGM ATLAS",
+      "compagnie": "CMA CGM",
+      "port": "Casablanca",
+      "terminal": "TPS (Terminal Polyvalent Sud)",
+      "dateArriveePrevue": "2026-07-06T03:32:27",
+      "dateArriveeReelle": "2026-07-06T03:18:27.026793",
+      "dateDepartPrevue": "2026-07-08T02:32:27",
+      "statut": "EN_COURS"
+    },
+    {
+      "id": "ESC-2026-0152",
+      "navire": "CMA CGM MEDAS",
+      "compagnie": "CMA CGM",
+      "port": "Casablanca",
+      "terminal": "TPS (Terminal Polyvalent Sud)",
+      "dateArriveePrevue": "2026-07-10T14:12:09",
+      "dateArriveeReelle": null,
+      "dateDepartPrevue": "2026-07-11T23:12:09",
+      "statut": "PREVU"
+    },
+    {
+      "id": "ESC-2026-0153",
+      "navire": "GRIMALDI TANGER",
+      "compagnie": "Grimaldi Lines",
+      "port": "Casablanca",
+      "terminal": "Terminal Roulier (Ro-Ro)",
+      "dateArriveePrevue": "2026-07-07T08:58:02",
+      "dateArriveeReelle": "2026-07-07T09:13:02.736926",
+      "dateDepartPrevue": "2026-07-08T13:58:02",
+      "statut": "EN_COURS"
+    },
+    {
+      "id": "ESC-2026-0154",
+      "navire": "BOURBON SAFI",
+      "compagnie": "Bourbon Maroc",
+      "port": "Casablanca",
+      "terminal": "TC1",
+      "dateArriveePrevue": "2026-07-07T11:15:24",
+      "dateArriveeReelle": "2026-07-07T11:01:24.452844",
+      "dateDepartPrevue": "2026-07-08T11:15:24",
+      "statut": "EN_COURS"
+    },
+    {
+      "id": "ESC-2026-0155",
+      "navire": "MSC AISHA",
+      "compagnie": "MSC",
+      "port": "Casablanca",
+      "terminal": "TC3",
+      "dateArriveePrevue": "2026-07-03T18:53:20",
+      "dateArriveeReelle": "2026-07-03T19:00:20.639430",
+      "dateDepartPrevue": "2026-07-05T18:53:20",
+      "statut": "CLOTUREE"
+    },
+    {
+      "id": "ESC-2026-0156",
+      "navire": "HAPAG TANGIER MED",
+      "compagnie": "Hapag-Lloyd",
+      "port": "Casablanca",
+      "terminal": "TC3",
+      "dateArriveePrevue": "2026-07-06T10:14:22",
+      "dateArriveeReelle": "2026-07-06T10:52:22.607235",
+      "dateDepartPrevue": "2026-07-07T20:14:22",
+      "statut": "CLOTUREE"
+    },
+    {
+      "id": "ESC-2026-0157",
+      "navire": "COMANAV RABAT",
+      "compagnie": "Comanav",
+      "port": "Casablanca",
+      "terminal": "Terminal Vraquiers",
+      "dateArriveePrevue": "2026-07-14T03:40:59",
+      "dateArriveeReelle": null,
+      "dateDepartPrevue": "2026-07-16T15:40:59",
+      "statut": "PREVU"
+    },
+    {
+      "id": "ESC-2026-0158",
+      "navire": "BOURBON SAFI",
+      "compagnie": "Bourbon Maroc",
+      "port": "Casablanca",
+      "terminal": "TC3",
+      "dateArriveePrevue": "2026-07-04T21:34:22",
+      "dateArriveeReelle": "2026-07-04T21:21:22.229595",
+      "dateDepartPrevue": "2026-07-07T04:34:22",
+      "statut": "CLOTUREE"
+    },
+    {
+      "id": "ESC-2026-0159",
+      "navire": "COSCO SHIPPING CASA",
+      "compagnie": "COSCO",
+      "port": "Casablanca",
+      "terminal": "TC1",
+      "dateArriveePrevue": "2026-07-09T06:15:48",
+      "dateArriveeReelle": null,
+      "dateDepartPrevue": "2026-07-11T09:15:48",
+      "statut": "PREVU"
+    },
+    {
+      "id": "ESC-2026-0160",
+      "navire": "MAERSK ESSAOUIRA",
+      "compagnie": "Maersk",
+      "port": "Casablanca",
+      "terminal": "Terminal Roulier (Ro-Ro)",
+      "dateArriveePrevue": "2026-07-02T05:59:41",
+      "dateArriveeReelle": "2026-07-02T05:47:41.197758",
+      "dateDepartPrevue": "2026-07-03T03:59:41",
+      "statut": "CLOTUREE"
+    },
+    {
+      "id": "ESC-2026-0161",
+      "navire": "GRIMALDI EUROPA",
+      "compagnie": "Grimaldi Lines",
+      "port": "Casablanca",
+      "terminal": "TC1",
+      "dateArriveePrevue": "2026-07-13T23:46:40",
+      "dateArriveeReelle": null,
+      "dateDepartPrevue": "2026-07-15T08:46:40",
+      "statut": "PREVU"
+    },
+    {
+      "id": "ESC-2026-0162",
+      "navire": "MSC AISHA",
+      "compagnie": "MSC",
+      "port": "Casablanca",
+      "terminal": "TPS (Terminal Polyvalent Sud)",
+      "dateArriveePrevue": "2026-07-10T07:06:01",
+      "dateArriveeReelle": null,
+      "dateDepartPrevue": "2026-07-12T10:06:01",
+      "statut": "PREVU"
+    },
+    {
+      "id": "ESC-2026-0163",
+      "navire": "COSCO GALAXY",
+      "compagnie": "COSCO",
+      "port": "Casablanca",
+      "terminal": "TC3",
+      "dateArriveePrevue": "2026-07-10T02:57:16",
+      "dateArriveeReelle": null,
+      "dateDepartPrevue": "2026-07-11T11:57:16",
+      "statut": "PREVU"
+    },
+    {
+      "id": "ESC-2026-0164",
+      "navire": "COMANAV RABAT",
+      "compagnie": "Comanav",
+      "port": "Casablanca",
+      "terminal": "TC3",
+      "dateArriveePrevue": "2026-07-10T02:34:02",
+      "dateArriveeReelle": null,
+      "dateDepartPrevue": "2026-07-12T01:34:02",
+      "statut": "PREVU"
+    },
+    {
+      "id": "ESC-2026-0165",
+      "navire": "COSCO SHIPPING CASA",
+      "compagnie": "COSCO",
+      "port": "Casablanca",
+      "terminal": "TC1",
+      "dateArriveePrevue": "2026-07-07T16:59:06",
+      "dateArriveeReelle": "2026-07-07T16:48:06.299005",
+      "dateDepartPrevue": "2026-07-08T16:59:06",
+      "statut": "EN_COURS"
+    },
+    {
+      "id": "ESC-2026-0166",
+      "navire": "GRIMALDI FES",
+      "compagnie": "Grimaldi Lines",
+      "port": "Casablanca",
+      "terminal": "TC4",
+      "dateArriveePrevue": "2026-07-03T04:19:35",
+      "dateArriveeReelle": "2026-07-03T04:30:35.219836",
+      "dateDepartPrevue": "2026-07-04T02:19:35",
+      "statut": "CLOTUREE"
+    },
+    {
+      "id": "ESC-2026-0167",
+      "navire": "COSCO GALAXY",
+      "compagnie": "COSCO",
+      "port": "Casablanca",
+      "terminal": "TC3",
+      "dateArriveePrevue": "2026-07-07T09:42:48",
+      "dateArriveeReelle": "2026-07-07T09:23:48.912402",
+      "dateDepartPrevue": "2026-07-08T22:42:48",
+      "statut": "EN_COURS"
+    },
+    {
+      "id": "ESC-2026-0168",
+      "navire": "COMANAV MARRAKECH",
+      "compagnie": "Comanav",
+      "port": "Casablanca",
+      "terminal": "TC1",
+      "dateArriveePrevue": "2026-07-13T08:56:46",
+      "dateArriveeReelle": null,
+      "dateDepartPrevue": "2026-07-14T18:56:46",
+      "statut": "PREVU"
+    },
+    {
+      "id": "ESC-2026-0169",
+      "navire": "CMA CGM MEDAS",
+      "compagnie": "CMA CGM",
+      "port": "Casablanca",
+      "terminal": "Terminal Vraquiers",
+      "dateArriveePrevue": "2026-07-08T12:36:20",
+      "dateArriveeReelle": null,
+      "dateDepartPrevue": "2026-07-10T00:36:20",
+      "statut": "PREVU"
+    },
+    {
+      "id": "ESC-2026-0170",
+      "navire": "GRIMALDI FES",
+      "compagnie": "Grimaldi Lines",
+      "port": "Casablanca",
+      "terminal": "TC4",
+      "dateArriveePrevue": "2026-07-04T11:31:20",
+      "dateArriveeReelle": "2026-07-04T12:15:20.501206",
+      "dateDepartPrevue": "2026-07-05T21:31:20",
+      "statut": "CLOTUREE"
+    },
+    {
+      "id": "ESC-2026-0171",
+      "navire": "BOURBON JADIDA",
+      "compagnie": "Bourbon Maroc",
+      "port": "Casablanca",
+      "terminal": "TC1",
+      "dateArriveePrevue": "2026-07-02T17:47:49",
+      "dateArriveeReelle": "2026-07-02T17:32:49.638935",
+      "dateDepartPrevue": "2026-07-04T04:47:49",
+      "statut": "CLOTUREE"
+    },
+    {
+      "id": "ESC-2026-0172",
+      "navire": "MSC ZOE",
+      "compagnie": "MSC",
+      "port": "Casablanca",
+      "terminal": "TC3",
+      "dateArriveePrevue": "2026-07-09T14:46:45",
+      "dateArriveeReelle": null,
+      "dateDepartPrevue": "2026-07-10T18:46:45",
+      "statut": "PREVU"
+    },
+    {
+      "id": "ESC-2026-0173",
+      "navire": "BOURBON JADIDA",
+      "compagnie": "Bourbon Maroc",
+      "port": "Casablanca",
+      "terminal": "Terminal Roulier (Ro-Ro)",
+      "dateArriveePrevue": "2026-07-01T05:01:01",
+      "dateArriveeReelle": "2026-07-01T04:45:01.006600",
+      "dateDepartPrevue": "2026-07-02T08:01:01",
+      "statut": "CLOTUREE"
+    }
+  ],
+  "commandes": [
+    {
+      "id": "CMD-8801",
+      "escaleId": "ESC-2026-0142",
+      "client": "Cosumar",
+      "sens": "IMPORT",
+      "trafic": "RORO",
+      "marchandise": "Engins de chantier",
+      "tonnagePrevu": 946,
+      "tonnageRealiseParShift": false,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8802",
+      "escaleId": "ESC-2026-0143",
+      "client": "Lafarge Holcim Maroc",
+      "sens": "IMPORT",
+      "trafic": "VRAC_LIQUIDE",
+      "marchandise": "Produits chimiques liquides",
+      "tonnagePrevu": 4684,
+      "tonnageRealiseParShift": true,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8803",
+      "escaleId": "ESC-2026-0144",
+      "client": "Nareva Import",
+      "sens": "EXPORT",
+      "trafic": "VRAC_LIQUIDE",
+      "marchandise": "Huile végétale brute",
+      "tonnagePrevu": 5938,
+      "tonnageRealiseParShift": true,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8804",
+      "escaleId": "ESC-2026-0145",
+      "client": "Holmarcom Import-Export",
+      "sens": "IMPORT",
+      "trafic": "VRAC_SOLIDE",
+      "marchandise": "Ciment en vrac",
+      "tonnagePrevu": 15711,
+      "tonnageRealiseParShift": true,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8805",
+      "escaleId": "ESC-2026-0146",
+      "client": "SNTL",
+      "sens": "IMPORT",
+      "trafic": "VRAC_LIQUIDE",
+      "marchandise": "Huile végétale brute",
+      "tonnagePrevu": 8378,
+      "tonnageRealiseParShift": true,
+      "shifts": [
+        {
+          "shiftId": "SHIFT-04-07-1",
+          "tonnageRealise": 2536
+        },
+        {
+          "shiftId": "SHIFT-04-07-2",
+          "tonnageRealise": 1907
+        },
+        {
+          "shiftId": "SHIFT-04-07-3",
+          "tonnageRealise": 1385
+        }
+      ]
+    },
+    {
+      "id": "CMD-8806",
+      "escaleId": "ESC-2026-0147",
+      "client": "Sonasid",
+      "sens": "IMPORT",
+      "trafic": "VRAC_SOLIDE",
+      "marchandise": "Céréales (blé tendre)",
+      "tonnagePrevu": 17512,
+      "tonnageRealiseParShift": true,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8807",
+      "escaleId": "ESC-2026-0148",
+      "client": "Groupe OCP",
+      "sens": "IMPORT",
+      "trafic": "CONTENEURS",
+      "marchandise": "Conteneurs frigorifiques (agrumes export)",
+      "tonnagePrevu": 3586,
+      "tonnageRealiseParShift": false,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8808",
+      "escaleId": "ESC-2026-0149",
+      "client": "SNTL",
+      "sens": "IMPORT",
+      "trafic": "RORO",
+      "marchandise": "Engins de chantier",
+      "tonnagePrevu": 1476,
+      "tonnageRealiseParShift": false,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8809",
+      "escaleId": "ESC-2026-0149",
+      "client": "Lafarge Holcim Maroc",
+      "sens": "EXPORT",
+      "trafic": "VRAC_SOLIDE",
+      "marchandise": "Céréales (blé tendre)",
+      "tonnagePrevu": 18926,
+      "tonnageRealiseParShift": true,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8810",
+      "escaleId": "ESC-2026-0150",
+      "client": "Holmarcom Import-Export",
+      "sens": "IMPORT",
+      "trafic": "DIVERS",
+      "marchandise": "Colis lourds industriels",
+      "tonnagePrevu": 301,
+      "tonnageRealiseParShift": false,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8811",
+      "escaleId": "ESC-2026-0151",
+      "client": "Ciments du Maroc",
+      "sens": "EXPORT",
+      "trafic": "DIVERS",
+      "marchandise": "Bois de construction",
+      "tonnagePrevu": 2393,
+      "tonnageRealiseParShift": false,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8812",
+      "escaleId": "ESC-2026-0152",
+      "client": "Lafarge Holcim Maroc",
+      "sens": "EXPORT",
+      "trafic": "VRAC_SOLIDE",
+      "marchandise": "Céréales (blé tendre)",
+      "tonnagePrevu": 9530,
+      "tonnageRealiseParShift": true,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8813",
+      "escaleId": "ESC-2026-0152",
+      "client": "Centrale Danone",
+      "sens": "IMPORT",
+      "trafic": "VRAC_SOLIDE",
+      "marchandise": "Phosphate",
+      "tonnagePrevu": 15784,
+      "tonnageRealiseParShift": true,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8814",
+      "escaleId": "ESC-2026-0153",
+      "client": "Renault Tanger Med",
+      "sens": "EXPORT",
+      "trafic": "DIVERS",
+      "marchandise": "Colis lourds industriels",
+      "tonnagePrevu": 736,
+      "tonnageRealiseParShift": false,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8815",
+      "escaleId": "ESC-2026-0153",
+      "client": "Sonasid",
+      "sens": "EXPORT",
+      "trafic": "VRAC_LIQUIDE",
+      "marchandise": "Produits chimiques liquides",
+      "tonnagePrevu": 7082,
+      "tonnageRealiseParShift": true,
+      "shifts": [
+        {
+          "shiftId": "SHIFT-07-07-1",
+          "tonnageRealise": 2480
+        },
+        {
+          "shiftId": "SHIFT-07-07-2",
+          "tonnageRealise": 1562
+        },
+        {
+          "shiftId": "SHIFT-07-07-3",
+          "tonnageRealise": 1166
+        }
+      ]
+    },
+    {
+      "id": "CMD-8816",
+      "escaleId": "ESC-2026-0154",
+      "client": "ONICL (Office National Interprofessionnel des Céréales)",
+      "sens": "EXPORT",
+      "trafic": "DIVERS",
+      "marchandise": "Bobines papier",
+      "tonnagePrevu": 1435,
+      "tonnageRealiseParShift": false,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8817",
+      "escaleId": "ESC-2026-0154",
+      "client": "Lafarge Holcim Maroc",
+      "sens": "EXPORT",
+      "trafic": "VRAC_LIQUIDE",
+      "marchandise": "Mélasse",
+      "tonnagePrevu": 7681,
+      "tonnageRealiseParShift": true,
+      "shifts": [
+        {
+          "shiftId": "SHIFT-07-07-1",
+          "tonnageRealise": null
+        },
+        {
+          "shiftId": "SHIFT-07-07-2",
+          "tonnageRealise": 2080
+        },
+        {
+          "shiftId": "SHIFT-07-07-3",
+          "tonnageRealise": null
+        }
+      ]
+    },
+    {
+      "id": "CMD-8818",
+      "escaleId": "ESC-2026-0155",
+      "client": "Groupe OCP",
+      "sens": "EXPORT",
+      "trafic": "VRAC_LIQUIDE",
+      "marchandise": "Huile végétale brute",
+      "tonnagePrevu": 8421,
+      "tonnageRealiseParShift": true,
+      "shifts": [
+        {
+          "shiftId": "SHIFT-03-07-1",
+          "tonnageRealise": 2184
+        },
+        {
+          "shiftId": "SHIFT-03-07-2",
+          "tonnageRealise": 2338
+        },
+        {
+          "shiftId": "SHIFT-03-07-3",
+          "tonnageRealise": 1203
+        }
+      ]
+    },
+    {
+      "id": "CMD-8819",
+      "escaleId": "ESC-2026-0155",
+      "client": "Renault Tanger Med",
+      "sens": "EXPORT",
+      "trafic": "RORO",
+      "marchandise": "Véhicules export (Renault Tanger)",
+      "tonnagePrevu": 1058,
+      "tonnageRealiseParShift": false,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8820",
+      "escaleId": "ESC-2026-0156",
+      "client": "Groupe OCP",
+      "sens": "EXPORT",
+      "trafic": "VRAC_LIQUIDE",
+      "marchandise": "Mélasse",
+      "tonnagePrevu": 3475,
+      "tonnageRealiseParShift": true,
+      "shifts": [
+        {
+          "shiftId": "SHIFT-06-07-1",
+          "tonnageRealise": 1246
+        },
+        {
+          "shiftId": "SHIFT-06-07-2",
+          "tonnageRealise": 838
+        },
+        {
+          "shiftId": "SHIFT-06-07-3",
+          "tonnageRealise": 540
+        }
+      ]
+    },
+    {
+      "id": "CMD-8821",
+      "escaleId": "ESC-2026-0157",
+      "client": "Cosumar",
+      "sens": "IMPORT",
+      "trafic": "RORO",
+      "marchandise": "Engins de chantier",
+      "tonnagePrevu": 572,
+      "tonnageRealiseParShift": false,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8822",
+      "escaleId": "ESC-2026-0158",
+      "client": "Sonasid",
+      "sens": "IMPORT",
+      "trafic": "DIVERS",
+      "marchandise": "Bois de construction",
+      "tonnagePrevu": 1852,
+      "tonnageRealiseParShift": false,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8823",
+      "escaleId": "ESC-2026-0159",
+      "client": "Somaca",
+      "sens": "IMPORT",
+      "trafic": "VRAC_SOLIDE",
+      "marchandise": "Ciment en vrac",
+      "tonnagePrevu": 20272,
+      "tonnageRealiseParShift": true,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8824",
+      "escaleId": "ESC-2026-0160",
+      "client": "Delassus Fruits",
+      "sens": "IMPORT",
+      "trafic": "VRAC_SOLIDE",
+      "marchandise": "Phosphate",
+      "tonnagePrevu": 11266,
+      "tonnageRealiseParShift": true,
+      "shifts": [
+        {
+          "shiftId": "SHIFT-02-07-1",
+          "tonnageRealise": 3617
+        },
+        {
+          "shiftId": "SHIFT-02-07-2",
+          "tonnageRealise": 2043
+        },
+        {
+          "shiftId": "SHIFT-02-07-3",
+          "tonnageRealise": 2198
+        }
+      ]
+    },
+    {
+      "id": "CMD-8825",
+      "escaleId": "ESC-2026-0160",
+      "client": "Groupe OCP",
+      "sens": "IMPORT",
+      "trafic": "CONTENEURS",
+      "marchandise": "Conteneurs frigorifiques (agrumes export)",
+      "tonnagePrevu": 2841,
+      "tonnageRealiseParShift": false,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8826",
+      "escaleId": "ESC-2026-0161",
+      "client": "Holmarcom Import-Export",
+      "sens": "EXPORT",
+      "trafic": "RORO",
+      "marchandise": "Engins de chantier",
+      "tonnagePrevu": 408,
+      "tonnageRealiseParShift": false,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8827",
+      "escaleId": "ESC-2026-0162",
+      "client": "SNTL",
+      "sens": "IMPORT",
+      "trafic": "RORO",
+      "marchandise": "Véhicules neufs (import)",
+      "tonnagePrevu": 341,
+      "tonnageRealiseParShift": false,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8828",
+      "escaleId": "ESC-2026-0162",
+      "client": "Sonasid",
+      "sens": "EXPORT",
+      "trafic": "VRAC_SOLIDE",
+      "marchandise": "Ciment en vrac",
+      "tonnagePrevu": 9729,
+      "tonnageRealiseParShift": true,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8829",
+      "escaleId": "ESC-2026-0163",
+      "client": "Nareva Import",
+      "sens": "EXPORT",
+      "trafic": "RORO",
+      "marchandise": "Engins de chantier",
+      "tonnagePrevu": 1092,
+      "tonnageRealiseParShift": false,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8830",
+      "escaleId": "ESC-2026-0164",
+      "client": "Groupe OCP",
+      "sens": "EXPORT",
+      "trafic": "VRAC_LIQUIDE",
+      "marchandise": "Huile végétale brute",
+      "tonnagePrevu": 6995,
+      "tonnageRealiseParShift": true,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8831",
+      "escaleId": "ESC-2026-0165",
+      "client": "Nareva Import",
+      "sens": "EXPORT",
+      "trafic": "CONTENEURS",
+      "marchandise": "Conteneurs divers 20'/40'",
+      "tonnagePrevu": 3616,
+      "tonnageRealiseParShift": false,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8832",
+      "escaleId": "ESC-2026-0166",
+      "client": "ONICL (Office National Interprofessionnel des Céréales)",
+      "sens": "IMPORT",
+      "trafic": "VRAC_SOLIDE",
+      "marchandise": "Clinker",
+      "tonnagePrevu": 9402,
+      "tonnageRealiseParShift": true,
+      "shifts": [
+        {
+          "shiftId": "SHIFT-03-07-1",
+          "tonnageRealise": 3420
+        },
+        {
+          "shiftId": "SHIFT-03-07-2",
+          "tonnageRealise": 2115
+        },
+        {
+          "shiftId": "SHIFT-03-07-3",
+          "tonnageRealise": 1341
+        }
+      ]
+    },
+    {
+      "id": "CMD-8833",
+      "escaleId": "ESC-2026-0166",
+      "client": "Aveiro Trading",
+      "sens": "IMPORT",
+      "trafic": "DIVERS",
+      "marchandise": "Pièces automobiles (colis lourds)",
+      "tonnagePrevu": 1296,
+      "tonnageRealiseParShift": false,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8834",
+      "escaleId": "ESC-2026-0167",
+      "client": "Holmarcom Import-Export",
+      "sens": "EXPORT",
+      "trafic": "RORO",
+      "marchandise": "Engins de chantier",
+      "tonnagePrevu": 754,
+      "tonnageRealiseParShift": false,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8835",
+      "escaleId": "ESC-2026-0168",
+      "client": "Centrale Danone",
+      "sens": "IMPORT",
+      "trafic": "VRAC_LIQUIDE",
+      "marchandise": "Huile végétale brute",
+      "tonnagePrevu": 4958,
+      "tonnageRealiseParShift": true,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8836",
+      "escaleId": "ESC-2026-0169",
+      "client": "Ciments du Maroc",
+      "sens": "EXPORT",
+      "trafic": "DIVERS",
+      "marchandise": "Bois de construction",
+      "tonnagePrevu": 1231,
+      "tonnageRealiseParShift": false,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8837",
+      "escaleId": "ESC-2026-0169",
+      "client": "ONICL (Office National Interprofessionnel des Céréales)",
+      "sens": "IMPORT",
+      "trafic": "CONTENEURS",
+      "marchandise": "Conteneurs divers 20'/40'",
+      "tonnagePrevu": 1946,
+      "tonnageRealiseParShift": false,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8838",
+      "escaleId": "ESC-2026-0170",
+      "client": "Marjane Import",
+      "sens": "EXPORT",
+      "trafic": "VRAC_SOLIDE",
+      "marchandise": "Clinker",
+      "tonnagePrevu": 15690,
+      "tonnageRealiseParShift": true,
+      "shifts": [
+        {
+          "shiftId": "SHIFT-04-07-1",
+          "tonnageRealise": 6195
+        },
+        {
+          "shiftId": "SHIFT-04-07-2",
+          "tonnageRealise": 2733
+        },
+        {
+          "shiftId": "SHIFT-04-07-3",
+          "tonnageRealise": 2565
+        }
+      ]
+    },
+    {
+      "id": "CMD-8839",
+      "escaleId": "ESC-2026-0171",
+      "client": "Holmarcom Import-Export",
+      "sens": "IMPORT",
+      "trafic": "DIVERS",
+      "marchandise": "Colis lourds industriels",
+      "tonnagePrevu": 911,
+      "tonnageRealiseParShift": false,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8840",
+      "escaleId": "ESC-2026-0172",
+      "client": "Delassus Fruits",
+      "sens": "EXPORT",
+      "trafic": "VRAC_LIQUIDE",
+      "marchandise": "Huile végétale brute",
+      "tonnagePrevu": 6697,
+      "tonnageRealiseParShift": true,
+      "shifts": []
+    },
+    {
+      "id": "CMD-8841",
+      "escaleId": "ESC-2026-0173",
+      "client": "Centrale Danone",
+      "sens": "EXPORT",
+      "trafic": "RORO",
+      "marchandise": "Véhicules export (Renault Tanger)",
+      "tonnagePrevu": 1481,
+      "tonnageRealiseParShift": false,
+      "shifts": []
+    }
+  ],
+  "arrets": [
+    {
+      "id": "ARR-401",
+      "equipementId": "CHARIOT-15",
+      "typeEquipement": "Chariot élévateur",
+      "dateDebut": "2026-07-02T11:06:26",
+      "dateFin": "2026-07-02T12:31:26",
+      "dureeMinutes": 85,
+      "motif": "Panne hydraulique",
+      "escaleId": "ESC-2026-0148"
+    },
+    {
+      "id": "ARR-402",
+      "equipementId": "PORTIQUE-03",
+      "typeEquipement": "Portique",
+      "dateDebut": "2026-07-07T23:37:44",
+      "dateFin": "2026-07-08T01:08:44",
+      "dureeMinutes": 91,
+      "motif": "Panne électrique",
+      "escaleId": "ESC-2026-0142"
+    },
+    {
+      "id": "ARR-403",
+      "equipementId": "SAUTERELLE-03",
+      "typeEquipement": "Sauterelle",
+      "dateDebut": "2026-07-04T16:06:20",
+      "dateFin": "2026-07-04T16:57:20",
+      "dureeMinutes": 51,
+      "motif": "Incident technique mineur",
+      "escaleId": "ESC-2026-0146"
+    },
+    {
+      "id": "ARR-404",
+      "equipementId": "BANDE-CONV-01",
+      "typeEquipement": "Bande de convoyage",
+      "dateDebut": "2026-07-03T03:06:26",
+      "dateFin": "2026-07-03T03:54:26",
+      "dureeMinutes": 48,
+      "motif": "Contrôle sécurité",
+      "escaleId": "ESC-2026-0148"
+    },
+    {
+      "id": "ARR-405",
+      "equipementId": "CHARIOT-08",
+      "typeEquipement": "Chariot élévateur",
+      "dateDebut": "2026-07-04T15:31:20",
+      "dateFin": "2026-07-04T17:08:20",
+      "dureeMinutes": 97,
+      "motif": "Maintenance préventive",
+      "escaleId": "ESC-2026-0170"
+    },
+    {
+      "id": "ARR-406",
+      "equipementId": "CHARIOT-15",
+      "typeEquipement": "Chariot élévateur",
+      "dateDebut": "2026-07-07T11:58:02",
+      "dateFin": null,
+      "dureeMinutes": null,
+      "motif": "Contrôle sécurité",
+      "escaleId": "ESC-2026-0153"
+    },
+    {
+      "id": "ARR-407",
+      "equipementId": "SAUTERELLE-03",
+      "typeEquipement": "Sauterelle",
+      "dateDebut": "2026-07-02T20:59:41",
+      "dateFin": null,
+      "dureeMinutes": null,
+      "motif": "Incident technique mineur",
+      "escaleId": "ESC-2026-0160"
+    },
+    {
+      "id": "ARR-408",
+      "equipementId": "SAUTERELLE-03",
+      "typeEquipement": "Sauterelle",
+      "dateDebut": "2026-07-07T18:42:48",
+      "dateFin": "2026-07-07T20:00:48",
+      "dureeMinutes": 78,
+      "motif": "Panne électrique",
+      "escaleId": "ESC-2026-0167"
+    },
+    {
+      "id": "ARR-409",
+      "equipementId": "GRUE-05",
+      "typeEquipement": "Grue mobile",
+      "dateDebut": "2026-07-05T13:06:20",
+      "dateFin": "2026-07-05T14:02:20",
+      "dureeMinutes": 56,
+      "motif": "Attente pièce de rechange",
+      "escaleId": "ESC-2026-0146"
+    },
+    {
+      "id": "ARR-410",
+      "equipementId": "CHARIOT-15",
+      "typeEquipement": "Chariot élévateur",
+      "dateDebut": "2026-07-07T12:37:44",
+      "dateFin": "2026-07-07T14:18:44",
+      "dureeMinutes": 101,
+      "motif": "Contrôle sécurité",
+      "escaleId": "ESC-2026-0142"
+    },
+    {
+      "id": "ARR-411",
+      "equipementId": "GRUE-01",
+      "typeEquipement": "Grue mobile",
+      "dateDebut": "2026-07-05T16:34:22",
+      "dateFin": null,
+      "dureeMinutes": null,
+      "motif": "Contrôle sécurité",
+      "escaleId": "ESC-2026-0158"
+    },
+    {
+      "id": "ARR-412",
+      "equipementId": "PORTIQUE-03",
+      "typeEquipement": "Portique",
+      "dateDebut": "2026-07-01T22:01:01",
+      "dateFin": "2026-07-01T22:51:01",
+      "dureeMinutes": 50,
+      "motif": "Maintenance préventive",
+      "escaleId": "ESC-2026-0173"
+    },
+    {
+      "id": "ARR-413",
+      "equipementId": "TRACTEUR-RORO-02",
+      "typeEquipement": "Tracteur RoRo",
+      "dateDebut": "2026-07-01T08:01:01",
+      "dateFin": "2026-07-01T09:08:01",
+      "dureeMinutes": 67,
+      "motif": "Intempéries (vent fort)",
+      "escaleId": "ESC-2026-0173"
+    },
+    {
+      "id": "ARR-414",
+      "equipementId": "CHARGEUSE-04",
+      "typeEquipement": "Chargeuse",
+      "dateDebut": "2026-07-07T07:32:27",
+      "dateFin": "2026-07-07T08:39:27",
+      "dureeMinutes": 67,
+      "motif": "Incident technique mineur",
+      "escaleId": "ESC-2026-0151"
+    },
+    {
+      "id": "ARR-415",
+      "equipementId": "BANDE-CONV-02",
+      "typeEquipement": "Bande de convoyage",
+      "dateDebut": "2026-07-03T03:59:41",
+      "dateFin": "2026-07-03T05:58:41",
+      "dureeMinutes": 119,
+      "motif": "Contrôle sécurité",
+      "escaleId": "ESC-2026-0160"
+    },
+    {
+      "id": "ARR-416",
+      "equipementId": "GRUE-02",
+      "typeEquipement": "Grue mobile",
+      "dateDebut": "2026-07-02T20:47:49",
+      "dateFin": "2026-07-02T21:43:49",
+      "dureeMinutes": 56,
+      "motif": "Panne hydraulique",
+      "escaleId": "ESC-2026-0171"
+    },
+    {
+      "id": "ARR-417",
+      "equipementId": "TRACTEUR-RORO-01",
+      "typeEquipement": "Tracteur RoRo",
+      "dateDebut": "2026-07-08T07:37:44",
+      "dateFin": "2026-07-08T08:51:44",
+      "dureeMinutes": 74,
+      "motif": "Panne électrique",
+      "escaleId": "ESC-2026-0142"
+    },
+    {
+      "id": "ARR-418",
+      "equipementId": "GRUE-02",
+      "typeEquipement": "Grue mobile",
+      "dateDebut": "2026-07-04T11:53:20",
+      "dateFin": "2026-07-04T13:44:20",
+      "dureeMinutes": 111,
+      "motif": "Panne électrique",
+      "escaleId": "ESC-2026-0155"
+    },
+    {
+      "id": "ARR-419",
+      "equipementId": "BANDE-CONV-01",
+      "typeEquipement": "Bande de convoyage",
+      "dateDebut": "2026-07-04T15:06:20",
+      "dateFin": "2026-07-04T15:37:20",
+      "dureeMinutes": 31,
+      "motif": "Intempéries (vent fort)",
+      "escaleId": "ESC-2026-0146"
+    },
+    {
+      "id": "ARR-420",
+      "equipementId": "BANDE-CONV-01",
+      "typeEquipement": "Bande de convoyage",
+      "dateDebut": "2026-07-01T09:01:01",
+      "dateFin": null,
+      "dureeMinutes": null,
+      "motif": "Incident technique mineur",
+      "escaleId": "ESC-2026-0173"
+    },
+    {
+      "id": "ARR-421",
+      "equipementId": "CHARIOT-12",
+      "typeEquipement": "Chariot élévateur",
+      "dateDebut": "2026-07-07T21:15:24",
+      "dateFin": "2026-07-07T22:40:24",
+      "dureeMinutes": 85,
+      "motif": "Panne électrique",
+      "escaleId": "ESC-2026-0154"
+    },
+    {
+      "id": "ARR-422",
+      "equipementId": "GRUE-05",
+      "typeEquipement": "Grue mobile",
+      "dateDebut": "2026-07-07T13:14:22",
+      "dateFin": "2026-07-07T14:28:22",
+      "dureeMinutes": 74,
+      "motif": "Panne hydraulique",
+      "escaleId": "ESC-2026-0156"
+    }
+  ],
+  "absences": [
+    {
+      "id": "ABS-2201",
+      "matricule": "MP-10078",
+      "nom": "Tazi Sanae",
+      "fonction": "Signaleur",
+      "dateDebut": "2026-07-11T14:45:00",
+      "dateFin": "2026-07-11T22:45:00",
+      "motif": "Accident de travail",
+      "shiftId": "SHIFT-11-07-2"
+    },
+    {
+      "id": "ABS-2202",
+      "matricule": "MP-10157",
+      "nom": "Bennani Zineb",
+      "fonction": "Grutier",
+      "dateDebut": "2026-07-11T22:45:00",
+      "dateFin": "2026-07-12T06:45:00",
+      "motif": "Accident de travail",
+      "shiftId": "SHIFT-11-07-3"
+    },
+    {
+      "id": "ABS-2203",
+      "matricule": "MP-10144",
+      "nom": "Berrada Tarik",
+      "fonction": "Docker",
+      "dateDebut": "2026-07-09T22:45:00",
+      "dateFin": "2026-07-10T06:45:00",
+      "motif": "Formation",
+      "shiftId": "SHIFT-09-07-3"
+    },
+    {
+      "id": "ABS-2204",
+      "matricule": "MP-10269",
+      "nom": "Kabbaj Hamza",
+      "fonction": "Grutier",
+      "dateDebut": "2026-07-06T06:45:00",
+      "dateFin": "2026-07-06T14:45:00",
+      "motif": "Formation",
+      "shiftId": "SHIFT-06-07-1"
+    },
+    {
+      "id": "ABS-2205",
+      "matricule": "MP-10311",
+      "nom": "Bennani Adil",
+      "fonction": "Élingueur",
+      "dateDebut": "2026-07-04T06:45:00",
+      "dateFin": "2026-07-04T14:45:00",
+      "motif": "Formation",
+      "shiftId": "SHIFT-04-07-1"
+    },
+    {
+      "id": "ABS-2206",
+      "matricule": "MP-10107",
+      "nom": "Ziani Anas",
+      "fonction": "Élingueur",
+      "dateDebut": "2026-07-13T22:45:00",
+      "dateFin": "2026-07-14T06:45:00",
+      "motif": "Congé exceptionnel",
+      "shiftId": "SHIFT-13-07-3"
+    },
+    {
+      "id": "ABS-2207",
+      "matricule": "MP-10074",
+      "nom": "Ouazzani Fatima-Zahra",
+      "fonction": "Docker",
+      "dateDebut": "2026-07-02T14:45:00",
+      "dateFin": "2026-07-02T22:45:00",
+      "motif": "Absence non justifiée",
+      "shiftId": "SHIFT-02-07-2"
+    },
+    {
+      "id": "ABS-2208",
+      "matricule": "MP-10236",
+      "nom": "Sekkat Anas",
+      "fonction": "Élingueur",
+      "dateDebut": "2026-07-08T06:45:00",
+      "dateFin": "2026-07-08T14:45:00",
+      "motif": "Congé exceptionnel",
+      "shiftId": "SHIFT-08-07-1"
+    },
+    {
+      "id": "ABS-2209",
+      "matricule": "MP-10144",
+      "nom": "Berrada Tarik",
+      "fonction": "Docker",
+      "dateDebut": "2026-07-01T06:45:00",
+      "dateFin": "2026-07-01T14:45:00",
+      "motif": "Absence non justifiée",
+      "shiftId": "SHIFT-01-07-1"
+    },
+    {
+      "id": "ABS-2210",
+      "matricule": "MP-10171",
+      "nom": "Bennani Bilal",
+      "fonction": "Docker",
+      "dateDebut": "2026-07-13T14:45:00",
+      "dateFin": "2026-07-13T22:45:00",
+      "motif": "Congé exceptionnel",
+      "shiftId": "SHIFT-13-07-2"
+    },
+    {
+      "id": "ABS-2211",
+      "matricule": "MP-10281",
+      "nom": "Berrada Zineb",
+      "fonction": "Conducteur d'engin RoRo",
+      "dateDebut": "2026-07-04T06:45:00",
+      "dateFin": "2026-07-04T14:45:00",
+      "motif": "Formation",
+      "shiftId": "SHIFT-04-07-1"
+    },
+    {
+      "id": "ABS-2212",
+      "matricule": "MP-10297",
+      "nom": "El Amrani Souad",
+      "fonction": "Conducteur d'engin RoRo",
+      "dateDebut": "2026-07-11T06:45:00",
+      "dateFin": "2026-07-11T14:45:00",
+      "motif": "Absence non justifiée",
+      "shiftId": "SHIFT-11-07-1"
+    },
+    {
+      "id": "ABS-2213",
+      "matricule": "MP-10188",
+      "nom": "Idrissi Karim",
+      "fonction": "Chef d'équipe",
+      "dateDebut": "2026-07-12T22:45:00",
+      "dateFin": "2026-07-13T06:45:00",
+      "motif": "Congé exceptionnel",
+      "shiftId": "SHIFT-12-07-3"
+    },
+    {
+      "id": "ABS-2214",
+      "matricule": "MP-10220",
+      "nom": "Kabbaj Younes",
+      "fonction": "Conducteur d'engin RoRo",
+      "dateDebut": "2026-07-10T22:45:00",
+      "dateFin": "2026-07-11T06:45:00",
+      "motif": "Absence non justifiée",
+      "shiftId": "SHIFT-10-07-3"
+    },
+    {
+      "id": "ABS-2215",
+      "matricule": "MP-10107",
+      "nom": "Ziani Anas",
+      "fonction": "Élingueur",
+      "dateDebut": "2026-07-06T06:45:00",
+      "dateFin": "2026-07-06T14:45:00",
+      "motif": "Congé exceptionnel",
+      "shiftId": "SHIFT-06-07-1"
+    },
+    {
+      "id": "ABS-2216",
+      "matricule": "MP-10220",
+      "nom": "Kabbaj Younes",
+      "fonction": "Conducteur d'engin RoRo",
+      "dateDebut": "2026-07-05T22:45:00",
+      "dateFin": "2026-07-06T06:45:00",
+      "motif": "Formation",
+      "shiftId": "SHIFT-05-07-3"
+    },
+    {
+      "id": "ABS-2217",
+      "matricule": "MP-10022",
+      "nom": "Fassi Anas",
+      "fonction": "Grutier",
+      "dateDebut": "2026-07-07T22:45:00",
+      "dateFin": "2026-07-08T06:45:00",
+      "motif": "Accident de travail",
+      "shiftId": "SHIFT-07-07-3"
+    },
+    {
+      "id": "ABS-2218",
+      "matricule": "MP-10269",
+      "nom": "Kabbaj Hamza",
+      "fonction": "Grutier",
+      "dateDebut": "2026-07-09T06:45:00",
+      "dateFin": "2026-07-09T14:45:00",
+      "motif": "Formation",
+      "shiftId": "SHIFT-09-07-1"
+    },
+    {
+      "id": "ABS-2219",
+      "matricule": "MP-10078",
+      "nom": "Tazi Sanae",
+      "fonction": "Signaleur",
+      "dateDebut": "2026-07-11T14:45:00",
+      "dateFin": "2026-07-11T22:45:00",
+      "motif": "Congé maladie",
+      "shiftId": "SHIFT-11-07-2"
+    },
+    {
+      "id": "ABS-2220",
+      "matricule": "MP-10074",
+      "nom": "Ouazzani Fatima-Zahra",
+      "fonction": "Docker",
+      "dateDebut": "2026-07-11T22:45:00",
+      "dateFin": "2026-07-12T06:45:00",
+      "motif": "Congé exceptionnel",
+      "shiftId": "SHIFT-11-07-3"
+    },
+    {
+      "id": "ABS-2221",
+      "matricule": "MP-10188",
+      "nom": "Idrissi Karim",
+      "fonction": "Chef d'équipe",
+      "dateDebut": "2026-07-03T06:45:00",
+      "dateFin": "2026-07-03T14:45:00",
+      "motif": "Formation",
+      "shiftId": "SHIFT-03-07-1"
+    },
+    {
+      "id": "ABS-2222",
+      "matricule": "MP-10055",
+      "nom": "El Amrani Nabil",
+      "fonction": "Élingueur",
+      "dateDebut": "2026-07-12T06:45:00",
+      "dateFin": "2026-07-12T14:45:00",
+      "motif": "Formation",
+      "shiftId": "SHIFT-12-07-1"
+    },
+    {
+      "id": "ABS-2223",
+      "matricule": "MP-10001",
+      "nom": "El Amrani Souad",
+      "fonction": "Grutier",
+      "dateDebut": "2026-07-04T06:45:00",
+      "dateFin": "2026-07-04T14:45:00",
+      "motif": "Formation",
+      "shiftId": "SHIFT-04-07-1"
+    },
+    {
+      "id": "ABS-2224",
+      "matricule": "MP-10078",
+      "nom": "Tazi Sanae",
+      "fonction": "Signaleur",
+      "dateDebut": "2026-07-02T14:45:00",
+      "dateFin": "2026-07-02T22:45:00",
+      "motif": "Formation",
+      "shiftId": "SHIFT-02-07-2"
+    },
+    {
+      "id": "ABS-2225",
+      "matricule": "MP-10136",
+      "nom": "Bennani Sanae",
+      "fonction": "Opérateur chariot élévateur",
+      "dateDebut": "2026-07-08T06:45:00",
+      "dateFin": "2026-07-08T14:45:00",
+      "motif": "Congé exceptionnel",
+      "shiftId": "SHIFT-08-07-1"
+    },
+    {
+      "id": "ABS-2226",
+      "matricule": "MP-10230",
+      "nom": "Berrada Rachid",
+      "fonction": "Pointeur",
+      "dateDebut": "2026-07-14T22:45:00",
+      "dateFin": "2026-07-15T06:45:00",
+      "motif": "Congé maladie",
+      "shiftId": "SHIFT-14-07-3"
+    },
+    {
+      "id": "ABS-2227",
+      "matricule": "MP-10188",
+      "nom": "Idrissi Karim",
+      "fonction": "Chef d'équipe",
+      "dateDebut": "2026-07-12T14:45:00",
+      "dateFin": "2026-07-12T22:45:00",
+      "motif": "Formation",
+      "shiftId": "SHIFT-12-07-2"
+    },
+    {
+      "id": "ABS-2228",
+      "matricule": "MP-10180",
+      "nom": "Idrissi Ghita",
+      "fonction": "Élingueur",
+      "dateDebut": "2026-07-14T14:45:00",
+      "dateFin": "2026-07-14T22:45:00",
+      "motif": "Accident de travail",
+      "shiftId": "SHIFT-14-07-2"
+    }
+  ]
+}

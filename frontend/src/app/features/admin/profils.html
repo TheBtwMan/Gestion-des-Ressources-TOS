@@ -1,0 +1,60 @@
+<div class="page-header">
+  <div>
+    <h1>Changement des profils par droits</h1>
+    <div class="subtitle">Un profil représente un ensemble de droits attribué aux utilisateurs</div>
+  </div>
+  <div class="actions">
+    <button class="btn btn-primary" (click)="showCreate.set(true)">+ Nouveau profil</button>
+  </div>
+</div>
+
+<div class="table-wrap">
+  <table class="mm-table">
+    <thead><tr><th>Profil</th><th>Droits</th><th></th></tr></thead>
+    <tbody>
+      @for (p of profils(); track p.id) {
+        <tr>
+          <td>{{ p.nom }}</td>
+          <td>{{ p.droits.length ? p.droits.map(d => d.libelle).join(', ') : '—' }}</td>
+          <td><button class="btn btn-secondary btn-sm" (click)="select(p)">Modifier les droits</button></td>
+        </tr>
+      } @empty {
+        <tr><td colspan="3" class="table-empty">Aucun profil.</td></tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+@if (selected(); as p) {
+  <div class="modal-backdrop" (click)="selected.set(null)">
+    <div class="modal-panel" (click)="$event.stopPropagation()">
+      <h3>Droits du profil « {{ p.nom }} »</h3>
+      <p class="text-sm text-muted mb-16">La liste des droits affectés doit contenir au minimum un droit.</p>
+      <div class="checkbox-group" style="flex-direction:column; align-items:flex-start;">
+        @for (d of droits(); track d.code) {
+          <label class="checkbox-option">
+            <input type="checkbox" [checked]="selectedDroits().has(d.code)" (change)="toggle(d.code, $any($event.target).checked)" />
+            {{ d.libelle }}
+          </label>
+        }
+      </div>
+      <div class="flex gap-8 justify-between mt-16">
+        <button class="btn btn-secondary" (click)="selected.set(null)">Annuler</button>
+        <button class="btn btn-primary" (click)="save()">Valider</button>
+      </div>
+    </div>
+  </div>
+}
+
+@if (showCreate()) {
+  <div class="modal-backdrop" (click)="showCreate.set(false)">
+    <div class="modal-panel" (click)="$event.stopPropagation()">
+      <h3>Nouveau profil</h3>
+      <div class="field"><label>Nom du profil</label><input type="text" [(ngModel)]="nouveauNom" /></div>
+      <div class="flex gap-8 justify-between mt-16">
+        <button class="btn btn-secondary" (click)="showCreate.set(false)">Annuler</button>
+        <button class="btn btn-primary" (click)="createProfil()">Valider</button>
+      </div>
+    </div>
+  </div>
+}

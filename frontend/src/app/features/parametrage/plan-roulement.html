@@ -1,0 +1,57 @@
+<div class="page-header">
+  <div>
+    <h1>Plan de roulement</h1>
+    <div class="subtitle">Association équipe ↔ shift, par mois ou par semaine</div>
+  </div>
+</div>
+
+<div class="card" style="max-width:640px;">
+  <div class="field">
+    <label>Roulement</label>
+    <div class="radio-group">
+      <label class="radio-option"><input type="radio" name="tr" [checked]="typeRoulement === 'MOIS'" (change)="typeRoulement = 'MOIS'" /> Mois</label>
+      <label class="radio-option"><input type="radio" name="tr" [checked]="typeRoulement === 'SEMAINE'" (change)="typeRoulement = 'SEMAINE'" /> Semaine</label>
+    </div>
+  </div>
+  <div class="field-row">
+    <div class="field"><label>Date début</label><input type="date" [(ngModel)]="dateDebut" /></div>
+    <div class="field"><label>Date fin</label><input type="date" [(ngModel)]="dateFin" /></div>
+  </div>
+  <div class="field-row">
+    <div class="field">
+      <label>Équipe</label>
+      <select [(ngModel)]="equipeId">
+        @for (e of equipes(); track e.id) { <option [ngValue]="e.id">{{ e.nom }}</option> }
+      </select>
+    </div>
+    <div class="field">
+      <label>Shift</label>
+      <div class="radio-group">
+        <label class="radio-option"><input type="radio" name="sh" [checked]="shift === 'SHIFT_1'" (change)="shift = 'SHIFT_1'" /> Shift 1</label>
+        <label class="radio-option"><input type="radio" name="sh" [checked]="shift === 'SHIFT_2'" (change)="shift = 'SHIFT_2'" /> Shift 2</label>
+        <label class="radio-option"><input type="radio" name="sh" [checked]="shift === 'SHIFT_3'" (change)="shift = 'SHIFT_3'" /> Shift 3</label>
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-primary mt-8" (click)="create()">Valider</button>
+</div>
+
+<div class="table-wrap">
+  <table class="mm-table">
+    <thead><tr><th>Équipe</th><th>Type</th><th>Début</th><th>Fin</th><th>Shift</th><th></th></tr></thead>
+    <tbody>
+      @for (p of plans(); track p.id) {
+        <tr>
+          <td>{{ p.equipe.nom }}</td>
+          <td>{{ p.typeRoulement === 'MOIS' ? 'Mois' : 'Semaine' }}</td>
+          <td>{{ p.dateDebut }}</td>
+          <td>{{ p.dateFin }}</td>
+          <td>{{ shiftLabel(p.shift) }}</td>
+          <td><button class="btn btn-danger btn-sm" (click)="remove(p.id)">Supprimer</button></td>
+        </tr>
+      } @empty {
+        <tr><td colspan="6" class="table-empty">Aucun plan de roulement.</td></tr>
+      }
+    </tbody>
+  </table>
+</div>

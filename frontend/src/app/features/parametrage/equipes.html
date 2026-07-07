@@ -1,0 +1,80 @@
+<div class="page-header">
+  <div>
+    <h1>Équipes</h1>
+    <div class="subtitle">Création des équipes et affectation du personnel par fonction</div>
+  </div>
+  <div class="actions">
+    <button class="btn btn-primary" (click)="showCreate.set(true)">+ Nouvelle équipe</button>
+  </div>
+</div>
+
+<div class="table-wrap">
+  <table class="mm-table">
+    <thead>
+      <tr><th>Id</th><th>Nom</th><th>Responsable</th><th>Terminal</th><th>Effectif</th><th></th></tr>
+    </thead>
+    <tbody>
+      @for (e of equipes(); track e.id) {
+        <tr>
+          <td>{{ e.id }}</td>
+          <td>{{ e.nom }}</td>
+          <td>{{ e.responsableMatricule || '—' }}</td>
+          <td>{{ e.terminal?.nom }}</td>
+          <td>{{ effectif(e.id) }}</td>
+          <td><button class="btn btn-secondary btn-sm" (click)="openMembres(e)">Gérer les membres</button></td>
+        </tr>
+      } @empty {
+        <tr><td colspan="6" class="table-empty">Aucune équipe.</td></tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+@if (showCreate()) {
+  <div class="modal-backdrop" (click)="showCreate.set(false)">
+    <div class="modal-panel" (click)="$event.stopPropagation()">
+      <h3>Nouvelle équipe</h3>
+      <div class="field"><label>Id.Equipe</label><input type="text" [(ngModel)]="newEquipe.id" placeholder="ex. EQ-5" /></div>
+      <div class="field"><label>Nom équipe</label><input type="text" [(ngModel)]="newEquipe.nom" /></div>
+      <div class="field"><label>Responsable équipe (matricule)</label><input type="text" [(ngModel)]="newEquipe.responsableMatricule" /></div>
+      <div class="field">
+        <label>Terminal</label>
+        <select [(ngModel)]="newEquipe.terminalId">
+          @for (t of terminaux(); track t.id) { <option [ngValue]="t.id">{{ t.nom }}</option> }
+        </select>
+      </div>
+      <div class="flex gap-8 justify-between mt-16">
+        <button class="btn btn-secondary" (click)="showCreate.set(false)">Annuler</button>
+        <button class="btn btn-primary" (click)="createEquipe()">Valider</button>
+      </div>
+    </div>
+  </div>
+}
+
+@if (selectedEquipe(); as eq) {
+  <div class="modal-backdrop" (click)="closeMembres()">
+    <div class="modal-panel" (click)="$event.stopPropagation()">
+      <h3>Membres de {{ eq.nom }}</h3>
+      <p class="text-sm text-muted mb-16">Sélectionnez le personnel (matricules rapatriés de HR Access) à affecter à cette équipe.</p>
+      @for (group of personnelParFonction(); track group.fonction) {
+        <div class="mb-8">
+          <strong class="text-sm">{{ group.fonction }}</strong>
+          <div class="checkbox-group mt-8" style="flex-wrap:wrap;">
+            @for (p of group.items; track p.matricule) {
+              <label class="checkbox-option">
+                <input type="checkbox"
+                       [checked]="membresSelectionnes().has(p.matricule)"
+                       (change)="toggleMembre(p.matricule, $any($event.target).checked)" />
+                {{ p.nom }} ({{ p.matricule }})
+              </label>
+            }
+          </div>
+        </div>
+      }
+      <div class="flex gap-8 justify-between mt-16">
+        <button class="btn btn-secondary" (click)="closeMembres()">Annuler</button>
+        <button class="btn btn-primary" (click)="saveMembres()">Valider</button>
+      </div>
+    </div>
+  </div>
+}
