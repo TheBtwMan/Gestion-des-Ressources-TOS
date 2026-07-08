@@ -78,6 +78,11 @@ public class DataSeeder implements CommandLineRunner {
         }
         if (escaleRepository.count() > 0) {
             log.info("Données déjà présentes, DataSeeder ignoré.");
+            Terminal terminal = terminalRepository.findAll().stream().findFirst().orElse(null);
+            if (terminal != null) {
+                Map<String, Terminal> terminaux = Map.of(terminal.getNom(), terminal);
+                seedAdministration(terminaux);
+            }
             return;
         }
 

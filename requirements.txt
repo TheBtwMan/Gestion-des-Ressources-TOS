@@ -12,3 +12,12 @@
 1. **Java Version Resolution**: The system default Java version was JDK 8, while the backend requires Java 17. Located the PyCharm JetBrains Runtime (`C:\Program Files\JetBrains\PyCharm Community Edition 2023.2\jbr`) which contains OpenJDK 17.0.7, and configured `JAVA_HOME` to point to it before launching `mvnw.cmd`.
 2. **Database Configuration**: Validated database connectivity using H2 in-memory PostgreSQL compatibility mode in `application.yml`, allowing the app to run independently of the external PostgreSQL Docker container if needed.
 3. **Frontend Dependencies**: Executed `npm install` in the frontend directory to resolve all Angular package requirements.
+
+## Troubleshooting Login Failures (Why a teammate might fail to log in)
+If a teammate enters the credentials (Matricule: `ADMIN001` / Password: `MarsaMaroc2026!`) but cannot log in, check the following:
+1. **Backend Server is Offline**: If they only started the Angular frontend (`http://localhost:4200`), the login will fail. The Spring Boot backend must be running on `http://localhost:8080` to handle authentication.
+2. **Java Version Issues**: The backend requires Java 17. If their backend server failed to compile or start, verify that their `JAVA_HOME` environment variable is pointing to JDK 17 (e.g. by setting it to their PyCharm JetBrains Runtime folder or installing JDK 17).
+3. **Database Seeding Skip (Fixed)**: The seeder has been updated to guarantee that the `ADMIN001` user is created on startup if it's missing, even if the database is not empty. If they are on an older commit, they can clear the database volume using `docker compose down -v && docker compose up -d` to force a re-seed.
+4. **Credentials Case Sensitivity**: Ensure the credentials are typed exactly as:
+   - **Matricule**: `ADMIN001` (all uppercase)
+   - **Mot de passe**: `MarsaMaroc2026!` (capitalized, ending with an exclamation mark)
