@@ -7,3 +7,8 @@
 ## Frontend
 - Node.js
 - Angular CLI
+
+## Fixes & Workarounds Applied Before Launching
+1. **Java Version Resolution**: The system default Java version was JDK 8, while the backend requires Java 17. Located the PyCharm JetBrains Runtime (`C:\Program Files\JetBrains\PyCharm Community Edition 2023.2\jbr`) which contains OpenJDK 17.0.7, and configured `JAVA_HOME` to point to it before launching `mvnw.cmd`.
+2. **Database Configuration**: Validated database connectivity using H2 in-memory PostgreSQL compatibility mode in `application.yml`, allowing the app to run independently of the external PostgreSQL Docker container if needed.
+3. **Frontend Dependencies**: Executed `npm install` in the frontend directory to resolve all Angular package requirements.
