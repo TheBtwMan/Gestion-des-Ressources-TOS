@@ -1,32 +1,32 @@
 <div class="app-shell">
   <aside class="app-sidebar">
-    <div class="brand"><span class="brand-mark">◆</span> Marsa Maroc</div>
+    <div class="brand"><img src="/logo.png" alt="Marsa Maroc" class="logo" /></div>
 
     <div class="nav-section-title">Reporting</div>
     @for (item of reporting; track item.path) {
       <a class="nav-link" [routerLink]="item.path" routerLinkActive="active">
-        <span>{{ item.icon }}</span> {{ item.label }}
+        {{ item.label }}
       </a>
     }
 
     <div class="nav-section-title">Paramétrages</div>
     @for (item of parametrage; track item.path) {
       <a class="nav-link" [routerLink]="item.path" routerLinkActive="active">
-        <span>{{ item.icon }}</span> {{ item.label }}
+        {{ item.label }}
       </a>
     }
 
     <div class="nav-section-title">Exploitation</div>
     @for (item of exploitation; track item.path) {
       <a class="nav-link" [routerLink]="item.path" routerLinkActive="active">
-        <span>{{ item.icon }}</span> {{ item.label }}
+        {{ item.label }}
       </a>
     }
 
     <div class="nav-section-title">Administration</div>
     @for (item of administration; track item.path) {
       <a class="nav-link" [routerLink]="item.path" routerLinkActive="active">
-        <span>{{ item.icon }}</span> {{ item.label }}
+        {{ item.label }}
       </a>
     }
   </aside>

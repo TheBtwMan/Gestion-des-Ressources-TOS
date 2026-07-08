@@ -1,24 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
 /* Design system - Marsa Maroc "Gestion des ressources" (Manutention) */
 
 :root {
-  --mm-red: #c8102e;
-  --mm-red-dark: #9c0c23;
-  --mm-black: #1a1a1a;
-  --mm-gray-900: #1f2328;
-  --mm-gray-700: #4b5563;
-  --mm-gray-500: #6b7280;
-  --mm-gray-300: #d1d5db;
-  --mm-gray-200: #e5e7eb;
-  --mm-gray-100: #f3f4f6;
-  --mm-gray-50: #f9fafb;
-  --mm-white: #ffffff;
-  --mm-green: #16a34a;
-  --mm-orange: #d97706;
-  --mm-blue: #2563eb;
+  /* Sky Blue Brand Colors */
+  --mm-sky: #0ea5e9;
+  --mm-sky-dark: #0284c7;
+  --mm-sky-light: #e0f2fe;
 
-  --mm-radius: 8px;
-  --mm-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.08);
-  --mm-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  /* Backward Compatibility Links */
+  --mm-red: var(--mm-sky);
+  --mm-red-dark: var(--mm-sky-dark);
+
+  /* Modern Gray / Slate Palette */
+  --mm-black: #0f172a;
+  --mm-gray-900: #1e293b;
+  --mm-gray-700: #475569;
+  --mm-gray-500: #64748b;
+  --mm-gray-300: #cbd5e1;
+  --mm-gray-200: #e2e8f0;
+  --mm-gray-100: #f1f5f9;
+  --mm-gray-50: #f8fafc;
+  --mm-white: #ffffff;
+  
+  --mm-green: #10b981;
+  --mm-orange: #f59e0b;
+  --mm-blue: #3b82f6;
+
+  --mm-radius: 12px;
+  --mm-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+  --mm-font: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 * {
@@ -33,7 +44,7 @@ body {
   margin: 0;
   font-family: var(--mm-font);
   color: var(--mm-gray-900);
-  background: var(--mm-gray-50);
+  background: var(--mm-gray-100); /* Slightly lighter page background */
   font-size: 14px;
   -webkit-font-smoothing: antialiased;
 }
@@ -45,7 +56,11 @@ h1, h2, h3, h4 {
 }
 
 a {
-  color: var(--mm-red);
+  color: var(--mm-sky-dark);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
 }
 
 /* ---------- Layout shell ---------- */
@@ -72,8 +87,8 @@ a {
 
 .app-sidebar {
   grid-area: sidebar;
-  background: var(--mm-black);
-  color: var(--mm-white);
+  background: #0a3d62; /* Corporate dark blue background */
+  color: rgba(255, 255, 255, 0.85);
   display: flex;
   flex-direction: column;
   overflow-y: auto;
@@ -88,14 +103,18 @@ a {
 .brand {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 16px 20px;
-  font-weight: 700;
-  font-size: 18px;
+  justify-content: center;
+  padding: 12px 16px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-.brand .brand-mark {
-  color: var(--mm-red);
+.brand img.logo {
+  width: 100%;
+  height: 44px;
+  object-fit: contain;
+  background: var(--mm-white); /* Wrapped in a clean white badge */
+  padding: 6px 16px;
+  border-radius: 8px;
+  box-sizing: border-box;
 }
 
 .nav-section-title {
@@ -104,6 +123,7 @@ a {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.45);
+  font-weight: 600;
 }
 
 .nav-link {
@@ -111,19 +131,20 @@ a {
   align-items: center;
   gap: 10px;
   padding: 9px 20px;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
   font-size: 13.5px;
   border-left: 3px solid transparent;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 .nav-link:hover {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.08);
   color: var(--mm-white);
 }
 .nav-link.active {
-  background: rgba(200, 16, 46, 0.18);
-  border-left-color: var(--mm-red);
+  background: rgba(255, 255, 255, 0.12);
+  border-left-color: var(--mm-sky);
   color: var(--mm-white);
   font-weight: 600;
 }
@@ -137,7 +158,7 @@ a {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: var(--mm-red);
+  background: var(--mm-sky);
   color: white;
   display: flex;
   align-items: center;
@@ -277,8 +298,8 @@ select, textarea {
 }
 input:focus, select:focus, textarea:focus {
   outline: none;
-  border-color: var(--mm-red);
-  box-shadow: 0 0 0 3px rgba(200, 16, 46, 0.12);
+  border-color: var(--mm-sky);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
 }
 select[multiple] {
   min-height: 120px;
@@ -450,7 +471,7 @@ table.mm-table tr:hover td {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(160deg, var(--mm-black) 0%, #2b0f13 60%, var(--mm-red-dark) 100%);
+  background: linear-gradient(135deg, #f1f5f9 0%, #cbd5e1 50%, #0ea5e9 100%);
 }
 .auth-card {
   width: 100%;
