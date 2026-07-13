@@ -10,7 +10,7 @@ import com.marsa.tos.domain.referentiel.Trafic;
 import com.marsa.tos.repository.*;
 import java.util.List;
 import java.util.Map;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

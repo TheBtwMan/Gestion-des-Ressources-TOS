@@ -31,7 +31,7 @@ Démarre PostgreSQL (`gestion_ressources`, user/password `marsa`/`marsa`) sur `l
 
 ```bash
 cd backend
-mvn spring-boot:run
+./mvnw spring-boot:run
 ```
 
 Au premier démarrage, le `DataSeeder` charge automatiquement le mock TOS
@@ -59,7 +59,7 @@ L'application démarre sur `http://localhost:4200`.
 
 | Couche | Technologie |
 |---|---|
-| Backend | Java 17, Spring Boot 2.7, Spring Data JPA, Spring Security + JWT |
+| Backend | Java 25, Spring Boot 3.5, Spring Data JPA, Spring Security + JWT |
 | Base de données | PostgreSQL (Docker) |
 | Frontend | Angular 22 (standalone components, signals), CSS maison (charte Marsa Maroc) |
 

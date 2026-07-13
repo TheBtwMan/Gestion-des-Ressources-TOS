@@ -3,7 +3,7 @@ package com.marsa.tos.domain.parametrage;
 import com.marsa.tos.common.Enums.Shift;
 import com.marsa.tos.common.Enums.TypeRoulement;
 import java.time.LocalDate;
-import javax.persistence.*;
+import jakarta.persistence.*;
 import lombok.*;
 
 /** Ecran "Plan de roulement" : association équipe <-> shift sur une période (mois ou semaine). */

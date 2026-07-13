@@ -9,7 +9,7 @@ import com.marsa.tos.repository.EscaleRepository;
 import java.time.Duration;
 import java.util.List;
 import java.util.UUID;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

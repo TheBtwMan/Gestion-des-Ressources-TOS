@@ -4,7 +4,7 @@ import com.marsa.tos.domain.parametrage.PeriodeShift;
 import com.marsa.tos.domain.referentiel.Terminal;
 import com.marsa.tos.repository.PeriodeShiftRepository;
 import com.marsa.tos.repository.TerminalRepository;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;

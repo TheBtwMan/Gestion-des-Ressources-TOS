@@ -8,7 +8,7 @@ import com.marsa.tos.repository.EscaleRepository;
 import com.marsa.tos.repository.PersonnelRepository;
 import java.util.List;
 import java.util.UUID;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

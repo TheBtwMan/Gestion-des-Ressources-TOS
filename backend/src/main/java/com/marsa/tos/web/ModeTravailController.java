@@ -4,7 +4,7 @@ import com.marsa.tos.domain.parametrage.ModeTravail;
 import com.marsa.tos.domain.referentiel.Terminal;
 import com.marsa.tos.repository.ModeTravailRepository;
 import com.marsa.tos.repository.TerminalRepository;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

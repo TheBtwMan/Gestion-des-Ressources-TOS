@@ -3,7 +3,7 @@ package com.marsa.tos.domain.parametrage;
 import com.marsa.tos.common.Enums.NatureSuivi;
 import com.marsa.tos.common.Enums.Sens;
 import com.marsa.tos.domain.referentiel.Trafic;
-import javax.persistence.*;
+import jakarta.persistence.*;
 import lombok.*;
 
 /** Ecran "Norme de productivité" : dépend du trafic, de la main théorique et du sens. */

@@ -10,7 +10,7 @@ import com.marsa.tos.repository.TerminalRepository;
 import com.marsa.tos.repository.UtilisateurRepository;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;

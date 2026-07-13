@@ -3,7 +3,7 @@ package com.marsa.tos.domain.parametrage;
 import com.marsa.tos.domain.referentiel.Terminal;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import javax.persistence.*;
+import jakarta.persistence.*;
 import lombok.*;
 
 /** Ecran "Période Shift" : 3 shifts fixes, horaires normaux et Ramadan, par terminal. */

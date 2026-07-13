@@ -1,6 +1,6 @@
 package com.marsa.tos.config;
 
-import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
+import com.fasterxml.jackson.datatype.hibernate6.Hibernate6Module;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,9 +13,9 @@ import org.springframework.context.annotation.Configuration;
 public class JacksonConfig {
 
     @Bean
-    public Hibernate5Module hibernate5Module() {
-        Hibernate5Module module = new Hibernate5Module();
-        module.enable(Hibernate5Module.Feature.FORCE_LAZY_LOADING);
+    public Hibernate6Module hibernate6Module() {
+        Hibernate6Module module = new Hibernate6Module();
+        module.enable(Hibernate6Module.Feature.FORCE_LAZY_LOADING);
         return module;
     }
 }

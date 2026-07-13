@@ -1,6 +1,6 @@
 package com.marsa.tos.domain.referentiel;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity

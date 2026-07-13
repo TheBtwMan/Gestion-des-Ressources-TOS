@@ -1,6 +1,6 @@
 package com.marsa.tos.domain.admin;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import lombok.*;
 
 /** Droit unitaire (ex. AFFECTATION_PREVISIONNELLE, VALIDATION, GESTION_UTILISATEURS...). */

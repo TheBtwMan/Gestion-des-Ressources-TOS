@@ -4,7 +4,7 @@ import com.marsa.tos.domain.referentiel.Terminal;
 import com.marsa.tos.domain.referentiel.Trafic;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.*;
+import jakarta.persistence.*;
 import lombok.*;
 
 /**

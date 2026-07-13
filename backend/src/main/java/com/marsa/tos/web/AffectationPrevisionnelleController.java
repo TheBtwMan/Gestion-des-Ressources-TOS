@@ -11,7 +11,7 @@ import com.marsa.tos.repository.AffectationPrevisionnelleRepository;
 import com.marsa.tos.repository.CommandeRepository;
 import com.marsa.tos.repository.MainTheoriqueRepository;
 import java.util.List;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;

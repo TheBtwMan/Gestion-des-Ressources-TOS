@@ -5,7 +5,7 @@ import com.marsa.tos.domain.parametrage.PlanRoulement;
 import com.marsa.tos.repository.EquipeRepository;
 import com.marsa.tos.repository.PlanRoulementRepository;
 import java.util.List;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

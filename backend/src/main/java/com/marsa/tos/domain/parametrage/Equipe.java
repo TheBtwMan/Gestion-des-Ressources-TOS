@@ -1,7 +1,7 @@
 package com.marsa.tos.domain.parametrage;
 
 import com.marsa.tos.domain.referentiel.Terminal;
-import javax.persistence.*;
+import jakarta.persistence.*;
 import lombok.*;
 
 /** Ecran "Equipe" : équipes travaillant sur un terminal, opération Manutention. */

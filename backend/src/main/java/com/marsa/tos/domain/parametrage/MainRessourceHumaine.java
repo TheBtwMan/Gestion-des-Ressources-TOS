@@ -3,7 +3,7 @@ package com.marsa.tos.domain.parametrage;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.marsa.tos.common.Enums.Emplacement;
 import com.marsa.tos.domain.referentiel.Fonction;
-import javax.persistence.*;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity

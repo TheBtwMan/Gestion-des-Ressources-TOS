@@ -2,7 +2,7 @@ package com.marsa.tos.domain.parametrage;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.marsa.tos.domain.referentiel.EquipementFamille;
-import javax.persistence.*;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity

@@ -3,7 +3,7 @@ package com.marsa.tos.domain.parametrage;
 import com.marsa.tos.common.Enums.JourType;
 import com.marsa.tos.common.Enums.SemaineType;
 import com.marsa.tos.domain.referentiel.Terminal;
-import javax.persistence.*;
+import jakarta.persistence.*;
 import lombok.*;
 
 /** Ecran "Mode de travail" - un par terminal, opération Manutention. */
