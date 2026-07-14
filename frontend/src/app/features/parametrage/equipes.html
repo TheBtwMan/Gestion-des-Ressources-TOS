@@ -3,9 +3,11 @@
     <h1>Équipes</h1>
     <div class="subtitle">Création des équipes et affectation du personnel par fonction</div>
   </div>
-  <div class="actions">
-    <button class="btn btn-primary" (click)="showCreate.set(true)">+ Nouvelle équipe</button>
-  </div>
+  @if (auth.hasDroit('PARAMETRAGE')) {
+    <div class="actions">
+      <button class="btn btn-primary" (click)="showCreate.set(true)">+ Nouvelle équipe</button>
+    </div>
+  }
 </div>
 
 <div class="table-wrap">
@@ -21,7 +23,11 @@
           <td>{{ e.responsableMatricule || '—' }}</td>
           <td>{{ e.terminal?.nom }}</td>
           <td>{{ effectif(e.id) }}</td>
-          <td><button class="btn btn-secondary btn-sm" (click)="openMembres(e)">Gérer les membres</button></td>
+          <td>
+            <button class="btn btn-secondary btn-sm" (click)="openMembres(e)">
+              {{ auth.hasDroit('PARAMETRAGE') ? 'Gérer les membres' : 'Voir les membres' }}
+            </button>
+          </td>
         </tr>
       } @empty {
         <tr><td colspan="6" class="table-empty">Aucune équipe.</td></tr>
@@ -63,6 +69,7 @@
             @for (p of group.items; track p.matricule) {
               <label class="checkbox-option">
                 <input type="checkbox"
+                       [disabled]="!auth.hasDroit('PARAMETRAGE')"
                        [checked]="membresSelectionnes().has(p.matricule)"
                        (change)="toggleMembre(p.matricule, $any($event.target).checked)" />
                 {{ p.nom }} ({{ p.matricule }})
@@ -72,8 +79,12 @@
         </div>
       }
       <div class="flex gap-8 justify-between mt-16">
-        <button class="btn btn-secondary" (click)="closeMembres()">Annuler</button>
-        <button class="btn btn-primary" (click)="saveMembres()">Valider</button>
+        <button class="btn btn-secondary" (click)="closeMembres()">
+          {{ auth.hasDroit('PARAMETRAGE') ? 'Annuler' : 'Fermer' }}
+        </button>
+        @if (auth.hasDroit('PARAMETRAGE')) {
+          <button class="btn btn-primary" (click)="saveMembres()">Valider</button>
+        }
       </div>
     </div>
   </div>

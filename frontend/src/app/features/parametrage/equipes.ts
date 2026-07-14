@@ -4,6 +4,8 @@ import { ParametrageService } from '../../core/parametrage.service';
 import { ReferentielService } from '../../core/referentiel.service';
 import { Equipe, Personnel, Terminal } from '../../core/models';
 
+import { AuthService } from '../../core/auth.service';
+
 @Component({
   selector: 'app-equipes',
   standalone: true,
@@ -20,7 +22,11 @@ export class EquipesComponent implements OnInit {
 
   newEquipe = { id: '', nom: '', responsableMatricule: '', terminalId: 0 };
 
-  constructor(private parametrageService: ParametrageService, private referentielService: ReferentielService) {}
+  constructor(
+    private parametrageService: ParametrageService,
+    private referentielService: ReferentielService,
+    public auth: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.loadEquipes();

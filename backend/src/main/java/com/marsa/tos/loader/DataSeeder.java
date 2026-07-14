@@ -530,6 +530,7 @@ public class DataSeeder implements CommandLineRunner {
                 new String[]{"AFFECTATION_REELLE", "Affectation réelle"},
                 new String[]{"VALIDATION", "Validation des affectations et clôture des escales"},
                 new String[]{"GESTION_UTILISATEURS", "Gestion des comptes et profils utilisateurs"},
+                new String[]{"ADMIN_PORT", "Administration du port — gestion des utilisateurs de son port"},
                 new String[]{"CONSULTATION", "Consultation des données de l'application"}
         );
         for (String[] d : droitDefs) {
@@ -540,6 +541,9 @@ public class DataSeeder implements CommandLineRunner {
         Profil superAdmin = profilRepository.findByNom("Super Administrateur")
                 .orElseGet(() -> profilRepository.save(Profil.builder().nom("Super Administrateur")
                         .droits(new ArrayList<>(droits.values())).build()));
+        profilRepository.findByNom("Administrateur du port")
+                .orElseGet(() -> profilRepository.save(Profil.builder().nom("Administrateur du port")
+                        .droits(List.of(droits.get("ADMIN_PORT"), droits.get("CONSULTATION"))).build()));
         profilRepository.findByNom("Responsable de prévision")
                 .orElseGet(() -> profilRepository.save(Profil.builder().nom("Responsable de prévision")
                         .droits(List.of(droits.get("AFFECTATION_PREVISIONNELLE"), droits.get("CONSULTATION"))).build()));

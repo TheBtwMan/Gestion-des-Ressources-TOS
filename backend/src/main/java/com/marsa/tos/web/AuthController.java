@@ -49,8 +49,10 @@ public class AuthController {
                 .distinct()
                 .collect(Collectors.toList());
 
+        Long termId = utilisateur.getTerminal() != null ? utilisateur.getTerminal().getId() : null;
+        String termNom = utilisateur.getTerminal() != null ? utilisateur.getTerminal().getNom() : null;
         return ResponseEntity.ok(new LoginResponse(token, utilisateur.getMatricule(), utilisateur.getNom(),
-                utilisateur.getPrenom(), profils, droits));
+                utilisateur.getPrenom(), profils, droits, termId, termNom));
     }
 
     @GetMapping("/me")
@@ -65,7 +67,9 @@ public class AuthController {
                 .map(d -> d.getCode())
                 .distinct()
                 .collect(Collectors.toList());
+        Long termId = utilisateur.getTerminal() != null ? utilisateur.getTerminal().getId() : null;
+        String termNom = utilisateur.getTerminal() != null ? utilisateur.getTerminal().getNom() : null;
         return ResponseEntity.ok(new LoginResponse(null, utilisateur.getMatricule(), utilisateur.getNom(),
-                utilisateur.getPrenom(), profils, droits));
+                utilisateur.getPrenom(), profils, droits, termId, termNom));
     }
 }

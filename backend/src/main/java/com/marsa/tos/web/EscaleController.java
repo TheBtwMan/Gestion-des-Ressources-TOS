@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /** Escales (interface Trafic/TOS) + écran "Clôturer une escale". */
@@ -75,6 +76,7 @@ public class EscaleController {
     }
 
     @PostMapping("/{id}/cloturer")
+    @PreAuthorize("hasRole('VALIDATION')")
     public Escale cloturer(@PathVariable String id,
                             @RequestBody Map<String, String> body) {
         Escale escale = escaleRepository.findById(id)

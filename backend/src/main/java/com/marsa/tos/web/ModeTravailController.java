@@ -7,6 +7,7 @@ import com.marsa.tos.repository.TerminalRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /** Ecran "Mode de travail" (opération Manutention), paramétré par terminal. */
@@ -26,6 +27,7 @@ public class ModeTravailController {
     }
 
     @PutMapping("/terminal/{terminalId}")
+    @PreAuthorize("hasRole('PARAMETRAGE')")
     public ModeTravail upsert(@PathVariable Long terminalId, @Valid @RequestBody ModeTravail body) {
         Terminal terminal = terminalRepository.findById(terminalId)
                 .orElseThrow(() -> new IllegalArgumentException("Terminal introuvable : " + terminalId));

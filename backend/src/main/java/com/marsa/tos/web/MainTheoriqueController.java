@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,12 +52,14 @@ public class MainTheoriqueController {
 
     @PostMapping
     @Transactional
+    @PreAuthorize("hasRole('PARAMETRAGE')")
     public MainTheorique create(@Valid @RequestBody MainTheorique body) {
         return save(body, null);
     }
 
     @PutMapping("/{id}")
     @Transactional
+    @PreAuthorize("hasRole('PARAMETRAGE')")
     public MainTheorique update(@PathVariable Long id, @Valid @RequestBody MainTheorique body) {
         return save(body, id);
     }
@@ -100,6 +103,7 @@ public class MainTheoriqueController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('PARAMETRAGE')")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         mainTheoriqueRepository.deleteById(id);
         return ResponseEntity.noContent().build();

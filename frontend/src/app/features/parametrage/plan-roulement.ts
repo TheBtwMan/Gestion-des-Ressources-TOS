@@ -3,6 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { ParametrageService } from '../../core/parametrage.service';
 import { Equipe, PlanRoulement, ShiftValue, TypeRoulement } from '../../core/models';
 
+import { AuthService } from '../../core/auth.service';
+
 @Component({
   selector: 'app-plan-roulement',
   standalone: true,
@@ -19,7 +21,7 @@ export class PlanRoulementComponent implements OnInit {
   equipeId = '';
   shift: ShiftValue = 'SHIFT_1';
 
-  constructor(private parametrageService: ParametrageService) {}
+  constructor(private parametrageService: ParametrageService, public auth: AuthService) {}
 
   ngOnInit(): void {
     this.parametrageService.equipes().subscribe((e) => {

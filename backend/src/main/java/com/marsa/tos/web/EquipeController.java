@@ -9,6 +9,7 @@ import java.util.List;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /** Ecran "Equipe" : création des équipes et affectation du personnel par fonction. */
@@ -37,6 +38,7 @@ public class EquipeController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('PARAMETRAGE')")
     public Equipe create(@Valid @RequestBody Equipe equipe) {
         equipe.setTerminal(terminalRepository.findById(equipe.getTerminal().getId())
                 .orElseThrow(() -> new IllegalArgumentException("Terminal introuvable")));
@@ -45,6 +47,7 @@ public class EquipeController {
 
     /** Affecte (ou retire) le personnel donné à cette équipe. */
     @PutMapping("/{id}/membres")
+    @PreAuthorize("hasRole('PARAMETRAGE')")
     public List<Personnel> setMembres(@PathVariable String id, @RequestBody List<String> matricules) {
         Equipe equipe = equipeRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Equipe introuvable : " + id));
@@ -55,6 +58,7 @@ public class EquipeController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('PARAMETRAGE')")
     public ResponseEntity<Void> delete(@PathVariable String id) {
         equipeRepository.deleteById(id);
         return ResponseEntity.noContent().build();

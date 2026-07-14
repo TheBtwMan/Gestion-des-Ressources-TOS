@@ -5,54 +5,67 @@
   </div>
 </div>
 
-<div class="card" style="max-width:680px;">
-  <div class="field-row">
-    <div class="field">
-      <label>Trafic</label>
-      <select [(ngModel)]="traficId">
-        @for (t of trafics(); track t.id) { <option [ngValue]="t.id">{{ t.nom }}</option> }
-      </select>
-    </div>
-    <div class="field">
-      <label>Main théorique</label>
-      <select [(ngModel)]="mainId">
-        @for (m of mainsDuTrafic(); track m.id) { <option [ngValue]="m.id">{{ m.nom }}</option> }
-      </select>
-    </div>
-    <div class="field">
-      <label>Mode</label>
-      <select [(ngModel)]="mode">
-        <option value="T/Shift">T/Shift</option>
-        <option value="T/Vacation">T/Vacation</option>
-        <option value="T/Escale">T/Escale</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="field-row">
-    <div class="field" style="max-width:160px;"><label>Norme</label><input type="number" [(ngModel)]="norme" /></div>
-    <div class="field">
-      <label>Sens</label>
-      <div class="checkbox-group">
-        <label class="checkbox-option"><input type="checkbox" [(ngModel)]="export" /> Export</label>
-        <label class="checkbox-option"><input type="checkbox" [(ngModel)]="import" /> Import</label>
+@if (auth.hasDroit('PARAMETRAGE')) {
+  <div class="card" style="max-width:680px;">
+    <div class="field-row">
+      <div class="field">
+        <label>Trafic</label>
+        <select [(ngModel)]="traficId">
+          @for (t of trafics(); track t.id) { <option [ngValue]="t.id">{{ t.nom }}</option> }
+        </select>
+      </div>
+      <div class="field">
+        <label>Main théorique</label>
+        <select [(ngModel)]="mainId">
+          @for (m of mainsDuTrafic(); track m.id) { <option [ngValue]="m.id">{{ m.nom }}</option> }
+        </select>
+      </div>
+      <div class="field">
+        <label>Mode</label>
+        <select [(ngModel)]="mode">
+          <option value="T/Shift">T/Shift</option>
+          <option value="T/Vacation">T/Vacation</option>
+          <option value="T/Escale">T/Escale</option>
+        </select>
       </div>
     </div>
-    <div class="field">
-      <label>Nature du suivi du produit</label>
-      <div class="radio-group">
-        <label class="radio-option"><input type="radio" name="ns" [checked]="natureSuivi === 'SHIFT'" (change)="natureSuivi = 'SHIFT'" /> Shift</label>
-        <label class="radio-option"><input type="radio" name="ns" [checked]="natureSuivi === 'FIN_DU_TRAVAIL'" (change)="natureSuivi = 'FIN_DU_TRAVAIL'" /> Fin du travail</label>
+
+    <div class="field-row">
+      <div class="field" style="max-width:160px;"><label>Norme</label><input type="number" [(ngModel)]="norme" /></div>
+      <div class="field">
+        <label>Sens</label>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" [(ngModel)]="export" /> Export</label>
+          <label class="checkbox-option"><input type="checkbox" [(ngModel)]="import" /> Import</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Nature du suivi du produit</label>
+        <div class="radio-group">
+          <label class="radio-option"><input type="radio" name="ns" [checked]="natureSuivi === 'SHIFT'" (change)="natureSuivi = 'SHIFT'" /> Shift</label>
+          <label class="radio-option"><input type="radio" name="ns" [checked]="natureSuivi === 'FIN_DU_TRAVAIL'" (change)="natureSuivi = 'FIN_DU_TRAVAIL'" /> Fin du travail</label>
+        </div>
       </div>
     </div>
-  </div>
 
-  <button class="btn btn-primary mt-8" (click)="create()">Ajouter</button>
-</div>
+    <button class="btn btn-primary mt-8" (click)="create()">Ajouter</button>
+  </div>
+}
 
 <div class="table-wrap">
   <table class="mm-table">
-    <thead><tr><th>Trafic</th><th>Main théorique</th><th>Mode</th><th>Norme</th><th>Sens</th><th></th></tr></thead>
+    <thead>
+      <tr>
+        <th>Trafic</th>
+        <th>Main théorique</th>
+        <th>Mode</th>
+        <th>Norme</th>
+        <th>Sens</th>
+        @if (auth.hasDroit('PARAMETRAGE')) {
+          <th></th>
+        }
+      </tr>
+    </thead>
     <tbody>
       @for (n of normes(); track n.id) {
         <tr>
@@ -61,10 +74,12 @@
           <td>{{ n.mode }}</td>
           <td>{{ n.norme }}</td>
           <td>{{ n.sens === 'IMPORT' ? 'Import' : 'Export' }}</td>
-          <td><button class="btn btn-danger btn-sm" (click)="remove(n.id)">Supprimer</button></td>
+          @if (auth.hasDroit('PARAMETRAGE')) {
+            <td><button class="btn btn-danger btn-sm" (click)="remove(n.id)">Supprimer</button></td>
+          }
         </tr>
       } @empty {
-        <tr><td colspan="6" class="table-empty">Aucune norme.</td></tr>
+        <tr><td [attr.colspan]="auth.hasDroit('PARAMETRAGE') ? 6 : 5" class="table-empty">Aucune norme.</td></tr>
       }
     </tbody>
   </table>

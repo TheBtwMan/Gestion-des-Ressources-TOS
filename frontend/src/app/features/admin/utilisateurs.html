@@ -38,12 +38,14 @@
       <h3>Compte utilisateur</h3>
       <div class="field-row">
         <div class="field"><label>Matricule</label><input type="text" [(ngModel)]="matricule" /></div>
-        <div class="field">
-          <label>Terminal</label>
-          <select [(ngModel)]="terminalId">
-            @for (t of terminaux(); track t.id) { <option [ngValue]="t.id">{{ t.nom }}</option> }
-          </select>
-        </div>
+        @if (auth.hasDroit('GESTION_UTILISATEURS')) {
+          <div class="field">
+            <label>Terminal</label>
+            <select [(ngModel)]="terminalId">
+              @for (t of terminaux(); track t.id) { <option [ngValue]="t.id">{{ t.nom }}</option> }
+            </select>
+          </div>
+        }
       </div>
       <div class="field-row">
         <div class="field"><label>Nom</label><input type="text" [(ngModel)]="nom" /></div>

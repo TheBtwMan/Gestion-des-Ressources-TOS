@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/admin")
 @RequiredArgsConstructor
+@PreAuthorize("hasAnyRole('GESTION_UTILISATEURS', 'ADMIN_PORT')")
 public class AdminController {
 
     private final DroitRepository droitRepository;
@@ -42,6 +44,7 @@ public class AdminController {
 
     /** Ecran "Changement des profils par droits" : la liste des droits affectés doit contenir au moins un droit. */
     @PutMapping("/profils/{id}/droits")
+    @PreAuthorize("hasRole('GESTION_UTILISATEURS')")
     public Profil setDroits(@PathVariable Long id, @RequestBody List<String> droitCodes) {
         if (droitCodes.isEmpty()) {
             throw new IllegalArgumentException("Un profil doit contenir au moins un droit.");
@@ -53,6 +56,7 @@ public class AdminController {
     }
 
     @PostMapping("/profils")
+    @PreAuthorize("hasRole('GESTION_UTILISATEURS')")
     public Profil createProfil(@Valid @RequestBody Profil body) {
         body.setId(null);
         if (body.getDroits() != null && !body.getDroits().isEmpty()) {

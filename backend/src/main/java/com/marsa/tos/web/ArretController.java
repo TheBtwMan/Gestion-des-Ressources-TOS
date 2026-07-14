@@ -12,6 +12,7 @@ import java.util.UUID;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /** Ecran "Suivi des absences et arrêts" (volet Arrêts, lié à un équipement). */
@@ -30,6 +31,7 @@ public class ArretController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('AFFECTATION_REELLE')")
     public Arret create(@Valid @RequestBody Arret body) {
         if (body.getId() == null) {
             body.setId("ARR-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase());
@@ -51,6 +53,7 @@ public class ArretController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('AFFECTATION_REELLE')")
     public ResponseEntity<Void> delete(@PathVariable String id) {
         arretRepository.deleteById(id);
         return ResponseEntity.noContent().build();

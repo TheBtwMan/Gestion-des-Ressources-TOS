@@ -2,6 +2,7 @@ import { Component, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ParametrageService } from '../../core/parametrage.service';
 import { ReferentielService } from '../../core/referentiel.service';
+import { AuthService } from '../../core/auth.service';
 import { JourType, ModeTravail, SemaineType, Terminal } from '../../core/models';
 
 @Component({
@@ -18,7 +19,11 @@ export class ModeTravailComponent implements OnInit {
   readonly saved = signal(false);
   readonly loading = signal(false);
 
-  constructor(private referentielService: ReferentielService, private parametrageService: ParametrageService) {}
+  constructor(
+    private referentielService: ReferentielService,
+    private parametrageService: ParametrageService,
+    public auth: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.referentielService.terminaux().subscribe((terminaux) => {

@@ -4,6 +4,8 @@ import { ParametrageService } from '../../core/parametrage.service';
 import { ReferentielService } from '../../core/referentiel.service';
 import { PeriodeShift, Terminal } from '../../core/models';
 
+import { AuthService } from '../../core/auth.service';
+
 const DEFAULT_PERIODE: Omit<PeriodeShift, 'terminal'> = {
   shift1NormalDebut: '06:45',
   shift1NormalFin: '14:45',
@@ -33,7 +35,11 @@ export class PeriodeShiftComponent implements OnInit {
   readonly form = signal<Omit<PeriodeShift, 'terminal'>>({ ...DEFAULT_PERIODE });
   readonly saved = signal(false);
 
-  constructor(private referentielService: ReferentielService, private parametrageService: ParametrageService) {}
+  constructor(
+    private referentielService: ReferentielService,
+    private parametrageService: ParametrageService,
+    public auth: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.referentielService.terminaux().subscribe((terminaux) => {

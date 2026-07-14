@@ -3,14 +3,28 @@
     <h1>Main théorique</h1>
     <div class="subtitle">Ressources humaines et matérielles théoriques par trafic et par terminal</div>
   </div>
-  <div class="actions">
-    <button class="btn btn-primary" (click)="openCreate()">+ Nouvelle main théorique</button>
-  </div>
+  @if (auth.hasDroit('PARAMETRAGE')) {
+    <div class="actions">
+      <button class="btn btn-primary" (click)="openCreate()">+ Nouvelle main théorique</button>
+    </div>
+  }
 </div>
 
 <div class="table-wrap">
   <table class="mm-table">
-    <thead><tr><th>Nom</th><th>Trafic</th><th>Terminal</th><th>Ress. humaines</th><th>Ress. matérielles</th><th>Accessoires</th><th></th></tr></thead>
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Trafic</th>
+        <th>Terminal</th>
+        <th>Ress. humaines</th>
+        <th>Ress. matérielles</th>
+        <th>Accessoires</th>
+        @if (auth.hasDroit('PARAMETRAGE')) {
+          <th></th>
+        }
+      </tr>
+    </thead>
     <tbody>
       @for (m of mains(); track m.id) {
         <tr>
@@ -20,10 +34,12 @@
           <td>{{ m.ressourcesHumaines.length }}</td>
           <td>{{ m.ressourcesMaterielles.length }}</td>
           <td>{{ m.accessoires.length }}</td>
-          <td><button class="btn btn-danger btn-sm" (click)="remove(m.id)">Supprimer</button></td>
+          @if (auth.hasDroit('PARAMETRAGE')) {
+            <td><button class="btn btn-danger btn-sm" (click)="remove(m.id)">Supprimer</button></td>
+          }
         </tr>
       } @empty {
-        <tr><td colspan="7" class="table-empty">Aucune main théorique.</td></tr>
+        <tr><td [attr.colspan]="auth.hasDroit('PARAMETRAGE') ? 7 : 6" class="table-empty">Aucune main théorique.</td></tr>
       }
     </tbody>
   </table>

@@ -11,6 +11,7 @@ import java.util.UUID;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /** Ecran "Suivi des absences et arrêts" (volet Absences, lié au personnel). */
@@ -29,6 +30,7 @@ public class AbsenceController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('AFFECTATION_REELLE')")
     public Absence create(@Valid @RequestBody Absence body) {
         if (body.getId() == null) {
             body.setId("ABS-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase());
@@ -45,6 +47,7 @@ public class AbsenceController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('AFFECTATION_REELLE')")
     public ResponseEntity<Void> delete(@PathVariable String id) {
         absenceRepository.deleteById(id);
         return ResponseEntity.noContent().build();

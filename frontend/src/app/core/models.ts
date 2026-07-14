@@ -297,6 +297,8 @@ export interface LoginResponse {
   prenom: string;
   profils: string[];
   droits: string[];
+  terminalId?: number | null;
+  terminalNom?: string | null;
 }
 
 export interface DashboardKpis {

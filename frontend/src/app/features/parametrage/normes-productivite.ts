@@ -2,6 +2,7 @@ import { Component, OnInit, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ParametrageService } from '../../core/parametrage.service';
 import { ReferentielService } from '../../core/referentiel.service';
+import { AuthService } from '../../core/auth.service';
 import { MainTheorique, NatureSuivi, NormeProductivite, Trafic } from '../../core/models';
 
 @Component({
@@ -25,7 +26,11 @@ export class NormesProductiviteComponent implements OnInit {
 
   readonly mainsDuTrafic = computed(() => this.mains().filter((m) => m.trafic.id === this.traficId));
 
-  constructor(private parametrageService: ParametrageService, private referentielService: ReferentielService) {}
+  constructor(
+    private parametrageService: ParametrageService,
+    private referentielService: ReferentielService,
+    public auth: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.load();

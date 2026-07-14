@@ -10,6 +10,7 @@ import java.util.List;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /** Ecran "Norme de productivité". */
@@ -28,6 +29,7 @@ public class NormeProductiviteController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('PARAMETRAGE')")
     public NormeProductivite create(@Valid @RequestBody NormeProductivite body) {
         Trafic trafic = traficRepository.findById(body.getTrafic().getId())
                 .orElseThrow(() -> new IllegalArgumentException("Trafic introuvable"));
@@ -40,6 +42,7 @@ public class NormeProductiviteController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('PARAMETRAGE')")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         normeProductiviteRepository.deleteById(id);
         return ResponseEntity.noContent().build();

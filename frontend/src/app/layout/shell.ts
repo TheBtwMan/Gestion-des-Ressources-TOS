@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, computed } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthService } from '../core/auth.service';
 
@@ -33,10 +33,30 @@ export class ShellComponent {
     { label: 'Absences & arrêts', path: '/exploitation/absences-arrets', icon: '⛔' },
   ];
 
-  readonly administration: NavItem[] = [
-    { label: 'Profils & droits', path: '/admin/profils', icon: '🔐' },
-    { label: 'Utilisateurs', path: '/admin/utilisateurs', icon: '🧑‍💼' },
-  ];
+  readonly administration = computed(() => {
+    const items: NavItem[] = [];
+    if (this.auth.hasDroit('GESTION_UTILISATEURS')) {
+      items.push({ label: 'Profils & droits', path: '/admin/profils', icon: '🔐' });
+    }
+    if (this.auth.hasDroit('GESTION_UTILISATEURS') || this.auth.hasDroit('ADMIN_PORT')) {
+      items.push({ label: 'Utilisateurs', path: '/admin/utilisateurs', icon: '🧑‍💼' });
+    }
+    return items;
+  });
+
+  /** Visible si l'utilisateur a le droit PARAMETRAGE ou AFFECTATION_PREVISIONNELLE. */
+  readonly showParametrage = computed(() => this.auth.hasDroit('PARAMETRAGE') || this.auth.hasDroit('AFFECTATION_PREVISIONNELLE'));
+
+  /** Visible si l'utilisateur a un droit lié à l'exploitation ou CONSULTATION. */
+  readonly showExploitation = computed(() =>
+    this.auth.hasDroit('AFFECTATION_PREVISIONNELLE') ||
+    this.auth.hasDroit('AFFECTATION_REELLE') ||
+    this.auth.hasDroit('VALIDATION') ||
+    this.auth.hasDroit('CONSULTATION')
+  );
+
+  /** Visible si l'utilisateur a le droit GESTION_UTILISATEURS ou ADMIN_PORT. */
+  readonly showAdministration = computed(() => this.auth.hasDroit('GESTION_UTILISATEURS') || this.auth.hasDroit('ADMIN_PORT'));
 
   constructor(readonly auth: AuthService) {}
 

@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /** Ecran "Période Shift" (opération Manutention), paramétré par terminal. */
@@ -27,6 +28,7 @@ public class PeriodeShiftController {
     }
 
     @PutMapping("/terminal/{terminalId}")
+    @PreAuthorize("hasRole('PARAMETRAGE')")
     public PeriodeShift upsert(@PathVariable Long terminalId, @Valid @RequestBody PeriodeShift body) {
         Terminal terminal = terminalRepository.findById(terminalId)
                 .orElseThrow(() -> new IllegalArgumentException("Terminal introuvable : " + terminalId));

@@ -13,4 +13,6 @@ public class LoginResponse {
     private String prenom;
     private List<String> profils;
     private List<String> droits;
+    private Long terminalId;
+    private String terminalNom;
 }

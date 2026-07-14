@@ -23,43 +23,45 @@
     <div>
       <h3 class="text-sm" style="text-transform:uppercase;color:var(--mm-gray-500);">Période normale</h3>
       <div class="field-row">
-        <div class="field"><label>Shift 1 début</label><input type="time" [value]="form().shift1NormalDebut" (input)="update('shift1NormalDebut', $any($event.target).value)" /></div>
-        <div class="field"><label>Shift 1 fin</label><input type="time" [value]="form().shift1NormalFin" (input)="update('shift1NormalFin', $any($event.target).value)" /></div>
+        <div class="field"><label>Shift 1 début</label><input type="time" [disabled]="!auth.hasDroit('PARAMETRAGE')" [value]="form().shift1NormalDebut" (input)="update('shift1NormalDebut', $any($event.target).value)" /></div>
+        <div class="field"><label>Shift 1 fin</label><input type="time" [disabled]="!auth.hasDroit('PARAMETRAGE')" [value]="form().shift1NormalFin" (input)="update('shift1NormalFin', $any($event.target).value)" /></div>
       </div>
       <div class="field-row">
-        <div class="field"><label>Shift 2 début</label><input type="time" [value]="form().shift2NormalDebut" (input)="update('shift2NormalDebut', $any($event.target).value)" /></div>
-        <div class="field"><label>Shift 2 fin</label><input type="time" [value]="form().shift2NormalFin" (input)="update('shift2NormalFin', $any($event.target).value)" /></div>
+        <div class="field"><label>Shift 2 début</label><input type="time" [disabled]="!auth.hasDroit('PARAMETRAGE')" [value]="form().shift2NormalDebut" (input)="update('shift2NormalDebut', $any($event.target).value)" /></div>
+        <div class="field"><label>Shift 2 fin</label><input type="time" [disabled]="!auth.hasDroit('PARAMETRAGE')" [value]="form().shift2NormalFin" (input)="update('shift2NormalFin', $any($event.target).value)" /></div>
       </div>
       <div class="field-row">
-        <div class="field"><label>Shift 3 début</label><input type="time" [value]="form().shift3NormalDebut" (input)="update('shift3NormalDebut', $any($event.target).value)" /></div>
-        <div class="field"><label>Shift 3 fin</label><input type="time" [value]="form().shift3NormalFin" (input)="update('shift3NormalFin', $any($event.target).value)" /></div>
+        <div class="field"><label>Shift 3 début</label><input type="time" [disabled]="!auth.hasDroit('PARAMETRAGE')" [value]="form().shift3NormalDebut" (input)="update('shift3NormalDebut', $any($event.target).value)" /></div>
+        <div class="field"><label>Shift 3 fin</label><input type="time" [disabled]="!auth.hasDroit('PARAMETRAGE')" [value]="form().shift3NormalFin" (input)="update('shift3NormalFin', $any($event.target).value)" /></div>
       </div>
     </div>
 
     <div>
       <h3 class="text-sm" style="text-transform:uppercase;color:var(--mm-gray-500);">Période Ramadan</h3>
       <div class="field-row">
-        <div class="field"><label>Shift 1 début</label><input type="time" [value]="form().shift1RamadanDebut" (input)="update('shift1RamadanDebut', $any($event.target).value)" /></div>
-        <div class="field"><label>Shift 1 fin</label><input type="time" [value]="form().shift1RamadanFin" (input)="update('shift1RamadanFin', $any($event.target).value)" /></div>
+        <div class="field"><label>Shift 1 début</label><input type="time" [disabled]="!auth.hasDroit('PARAMETRAGE')" [value]="form().shift1RamadanDebut" (input)="update('shift1RamadanDebut', $any($event.target).value)" /></div>
+        <div class="field"><label>Shift 1 fin</label><input type="time" [disabled]="!auth.hasDroit('PARAMETRAGE')" [value]="form().shift1RamadanFin" (input)="update('shift1RamadanFin', $any($event.target).value)" /></div>
       </div>
       <div class="field-row">
-        <div class="field"><label>Shift 2 début</label><input type="time" [value]="form().shift2RamadanDebut" (input)="update('shift2RamadanDebut', $any($event.target).value)" /></div>
-        <div class="field"><label>Shift 2 fin</label><input type="time" [value]="form().shift2RamadanFin" (input)="update('shift2RamadanFin', $any($event.target).value)" /></div>
+        <div class="field"><label>Shift 2 début</label><input type="time" [disabled]="!auth.hasDroit('PARAMETRAGE')" [value]="form().shift2RamadanDebut" (input)="update('shift2RamadanDebut', $any($event.target).value)" /></div>
+        <div class="field"><label>Shift 2 fin</label><input type="time" [disabled]="!auth.hasDroit('PARAMETRAGE')" [value]="form().shift2RamadanFin" (input)="update('shift2RamadanFin', $any($event.target).value)" /></div>
       </div>
       <div class="field-row">
-        <div class="field"><label>Shift 3 début</label><input type="time" [value]="form().shift3RamadanDebut" (input)="update('shift3RamadanDebut', $any($event.target).value)" /></div>
-        <div class="field"><label>Shift 3 fin</label><input type="time" [value]="form().shift3RamadanFin" (input)="update('shift3RamadanFin', $any($event.target).value)" /></div>
+        <div class="field"><label>Shift 3 début</label><input type="time" [disabled]="!auth.hasDroit('PARAMETRAGE')" [value]="form().shift3RamadanDebut" (input)="update('shift3RamadanDebut', $any($event.target).value)" /></div>
+        <div class="field"><label>Shift 3 fin</label><input type="time" [disabled]="!auth.hasDroit('PARAMETRAGE')" [value]="form().shift3RamadanFin" (input)="update('shift3RamadanFin', $any($event.target).value)" /></div>
       </div>
     </div>
   </div>
 
   <h3 class="text-sm mt-16" style="text-transform:uppercase;color:var(--mm-gray-500);">Dates Ramadan</h3>
   <div class="field-row">
-    <div class="field"><label>Date début</label><input type="date" [value]="form().ramadanDateDebut ?? ''" (input)="update('ramadanDateDebut', $any($event.target).value)" /></div>
-    <div class="field"><label>Date fin</label><input type="date" [value]="form().ramadanDateFin ?? ''" (input)="update('ramadanDateFin', $any($event.target).value)" /></div>
+    <div class="field"><label>Date début</label><input type="date" [disabled]="!auth.hasDroit('PARAMETRAGE')" [value]="form().ramadanDateDebut ?? ''" (input)="update('ramadanDateDebut', $any($event.target).value)" /></div>
+    <div class="field"><label>Date fin</label><input type="date" [disabled]="!auth.hasDroit('PARAMETRAGE')" [value]="form().ramadanDateFin ?? ''" (input)="update('ramadanDateFin', $any($event.target).value)" /></div>
   </div>
 
-  <div class="flex gap-8 mt-16">
-    <button class="btn btn-primary" (click)="save()">Valider</button>
-  </div>
+  @if (auth.hasDroit('PARAMETRAGE')) {
+    <div class="flex gap-8 mt-16">
+      <button class="btn btn-primary" (click)="save()">Valider</button>
+    </div>
+  }
 </div>

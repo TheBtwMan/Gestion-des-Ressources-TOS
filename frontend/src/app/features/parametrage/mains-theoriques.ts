@@ -24,6 +24,8 @@ interface MaterielRow {
   familleId: number | null;
 }
 
+import { AuthService } from '../../core/auth.service';
+
 @Component({
   selector: 'app-mains-theoriques',
   standalone: true,
@@ -46,7 +48,11 @@ export class MainsTheoriquesComponent implements OnInit {
   materielRows: MaterielRow[] = [];
   accessoireIds = new Set<number>();
 
-  constructor(private parametrageService: ParametrageService, private referentielService: ReferentielService) {}
+  constructor(
+    private parametrageService: ParametrageService,
+    private referentielService: ReferentielService,
+    public auth: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.load();

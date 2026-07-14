@@ -2,6 +2,7 @@ import { Component, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AdminService } from '../../core/admin.service';
 import { ReferentielService } from '../../core/referentiel.service';
+import { AuthService } from '../../core/auth.service';
 import { Profil, Terminal, Utilisateur } from '../../core/models';
 
 @Component({
@@ -24,19 +25,34 @@ export class UtilisateursComponent implements OnInit {
   terminalId: number | null = null;
   profilIds = new Set<number>();
 
-  constructor(private adminService: AdminService, private referentielService: ReferentielService) {}
+  constructor(
+    private adminService: AdminService,
+    private referentielService: ReferentielService,
+    readonly auth: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.load();
     this.adminService.profils().subscribe((p) => this.profils.set(p));
     this.referentielService.terminaux().subscribe((t) => {
       this.terminaux.set(t);
-      if (t.length) this.terminalId = t[0].id;
+      if (this.auth.hasDroit('ADMIN_PORT') && !this.auth.hasDroit('GESTION_UTILISATEURS')) {
+        this.terminalId = this.auth.session()?.terminalId ?? null;
+      } else if (t.length) {
+        this.terminalId = t[0].id;
+      }
     });
   }
 
   load(): void {
-    this.adminService.utilisateurs().subscribe((u) => this.utilisateurs.set(u));
+    this.adminService.utilisateurs().subscribe((u) => {
+      if (this.auth.hasDroit('ADMIN_PORT') && !this.auth.hasDroit('GESTION_UTILISATEURS')) {
+        const terminalId = this.auth.session()?.terminalId;
+        this.utilisateurs.set(u.filter((user) => user.terminal?.id === terminalId));
+      } else {
+        this.utilisateurs.set(u);
+      }
+    });
   }
 
   openCreate(): void {
@@ -46,6 +62,12 @@ export class UtilisateursComponent implements OnInit {
     this.motDePasse = '';
     this.confirmMotDePasse = '';
     this.profilIds = new Set();
+    if (this.auth.hasDroit('ADMIN_PORT') && !this.auth.hasDroit('GESTION_UTILISATEURS')) {
+      this.terminalId = this.auth.session()?.terminalId ?? null;
+    } else {
+      const t = this.terminaux();
+      if (t.length) this.terminalId = t[0].id;
+    }
     this.showCreate.set(true);
   }
 

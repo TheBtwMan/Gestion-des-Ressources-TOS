@@ -14,6 +14,8 @@ interface Session {
   prenom: string;
   profils: string[];
   droits: string[];
+  terminalId?: number | null;
+  terminalNom?: string | null;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -41,6 +43,8 @@ export class AuthService {
             prenom: res.prenom,
             profils: res.profils,
             droits: res.droits,
+            terminalId: res.terminalId,
+            terminalNom: res.terminalNom,
           };
           this.sessionSignal.set(session);
           localStorage.setItem(STORAGE_KEY, JSON.stringify(session));

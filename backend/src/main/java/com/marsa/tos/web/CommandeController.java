@@ -13,6 +13,7 @@ import java.util.Map;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /** Ecran "Affectation prévisionnelle" (en-tête commande) + "Validation" + "Lier commande à une escale". */
@@ -46,6 +47,7 @@ public class CommandeController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('AFFECTATION_PREVISIONNELLE')")
     public Commande create(@Valid @RequestBody Commande body) {
         Trafic trafic = traficRepository.findById(body.getTrafic().getId())
                 .orElseThrow(() -> new IllegalArgumentException("Trafic introuvable"));
@@ -66,6 +68,7 @@ public class CommandeController {
 
     /** Ecran "Lier commande à une escale" : chaque commande ne peut être liée qu'à une seule escale. */
     @PostMapping("/{numero}/lier-escale/{escaleId}")
+    @PreAuthorize("hasAnyRole('AFFECTATION_PREVISIONNELLE', 'VALIDATION')")
     public Commande lierEscale(@PathVariable String numero, @PathVariable String escaleId) {
         Commande commande = commandeRepository.findById(numero)
                 .orElseThrow(() -> new IllegalArgumentException("Commande introuvable : " + numero));
@@ -87,6 +90,7 @@ public class CommandeController {
     }
 
     @PostMapping("/{numero}/valider")
+    @PreAuthorize("hasRole('VALIDATION')")
     public Commande valider(@PathVariable String numero) {
         Commande commande = commandeRepository.findById(numero)
                 .orElseThrow(() -> new IllegalArgumentException("Commande introuvable : " + numero));

@@ -8,6 +8,7 @@ import java.util.List;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /** Ecran "Plan de roulement" : association équipe <-> shift, par mois ou par semaine. */
@@ -25,6 +26,7 @@ public class PlanRoulementController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('PARAMETRAGE')")
     public PlanRoulement create(@Valid @RequestBody PlanRoulement body) {
         Equipe equipe = equipeRepository.findById(body.getEquipe().getId())
                 .orElseThrow(() -> new IllegalArgumentException("Equipe introuvable"));
@@ -34,6 +36,7 @@ public class PlanRoulementController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('PARAMETRAGE')")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         planRoulementRepository.deleteById(id);
         return ResponseEntity.noContent().build();

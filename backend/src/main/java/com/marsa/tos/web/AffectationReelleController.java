@@ -14,6 +14,7 @@ import java.util.List;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,12 +43,14 @@ public class AffectationReelleController {
 
     @PostMapping
     @Transactional
+    @PreAuthorize("hasRole('AFFECTATION_REELLE')")
     public AffectationReelle create(@Valid @RequestBody AffectationReelle body) {
         return save(body, null);
     }
 
     @PutMapping("/{id}")
     @Transactional
+    @PreAuthorize("hasRole('AFFECTATION_REELLE')")
     public AffectationReelle update(@PathVariable Long id, @Valid @RequestBody AffectationReelle body) {
         return save(body, id);
     }
@@ -104,6 +107,7 @@ public class AffectationReelleController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('AFFECTATION_REELLE')")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         repository.deleteById(id);
         return ResponseEntity.noContent().build();

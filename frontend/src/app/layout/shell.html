@@ -9,25 +9,31 @@
       </a>
     }
 
-    <div class="nav-section-title">Paramétrages</div>
-    @for (item of parametrage; track item.path) {
-      <a class="nav-link" [routerLink]="item.path" routerLinkActive="active">
-        {{ item.label }}
-      </a>
+    @if (showParametrage()) {
+      <div class="nav-section-title">Paramétrages</div>
+      @for (item of parametrage; track item.path) {
+        <a class="nav-link" [routerLink]="item.path" routerLinkActive="active">
+          {{ item.label }}
+        </a>
+      }
     }
 
-    <div class="nav-section-title">Exploitation</div>
-    @for (item of exploitation; track item.path) {
-      <a class="nav-link" [routerLink]="item.path" routerLinkActive="active">
-        {{ item.label }}
-      </a>
+    @if (showExploitation()) {
+      <div class="nav-section-title">Exploitation</div>
+      @for (item of exploitation; track item.path) {
+        <a class="nav-link" [routerLink]="item.path" routerLinkActive="active">
+          {{ item.label }}
+        </a>
+      }
     }
 
-    <div class="nav-section-title">Administration</div>
-    @for (item of administration; track item.path) {
-      <a class="nav-link" [routerLink]="item.path" routerLinkActive="active">
-        {{ item.label }}
-      </a>
+    @if (showAdministration()) {
+      <div class="nav-section-title">Administration</div>
+      @for (item of administration(); track item.path) {
+        <a class="nav-link" [routerLink]="item.path" routerLinkActive="active">
+          {{ item.label }}
+        </a>
+      }
     }
   </aside>
 

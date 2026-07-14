@@ -1,6 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AdminService } from '../../core/admin.service';
+import { AuthService } from '../../core/auth.service';
 import { Droit, Profil } from '../../core/models';
 
 @Component({
@@ -18,7 +19,7 @@ export class ProfilsComponent implements OnInit {
 
   nouveauNom = '';
 
-  constructor(private adminService: AdminService) {}
+  constructor(private adminService: AdminService, readonly auth: AuthService) {}
 
   ngOnInit(): void {
     this.load();

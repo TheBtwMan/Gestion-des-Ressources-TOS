@@ -14,6 +14,7 @@ import java.util.List;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,12 +43,14 @@ public class AffectationPrevisionnelleController {
 
     @PostMapping
     @Transactional
+    @PreAuthorize("hasRole('AFFECTATION_PREVISIONNELLE')")
     public AffectationPrevisionnelle create(@Valid @RequestBody AffectationPrevisionnelle body) {
         return save(body, null);
     }
 
     @PutMapping("/{id}")
     @Transactional
+    @PreAuthorize("hasRole('AFFECTATION_PREVISIONNELLE')")
     public AffectationPrevisionnelle update(@PathVariable Long id, @Valid @RequestBody AffectationPrevisionnelle body) {
         return save(body, id);
     }
@@ -98,6 +101,7 @@ public class AffectationPrevisionnelleController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('AFFECTATION_PREVISIONNELLE')")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         repository.deleteById(id);
         return ResponseEntity.noContent().build();
