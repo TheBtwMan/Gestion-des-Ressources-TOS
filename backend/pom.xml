@@ -89,6 +89,7 @@
 		</dependency>
 	</dependencies>
 	<build>
+		<testSourceDirectory>${project.basedir}/../TestsUnitaires</testSourceDirectory>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
