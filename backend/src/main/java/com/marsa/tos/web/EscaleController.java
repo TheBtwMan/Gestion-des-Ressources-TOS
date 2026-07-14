@@ -66,13 +66,13 @@ public class EscaleController {
                 .sorted(Comparator.comparing(Arret::getDateFin).reversed())
                 .collect(Collectors.toList());
 
-        return Map.of(
-                "escale", escale,
-                "commandes", commandes,
-                "tonnageParProduit", tonnageParProduit,
-                "dateDebutTravailSuggeree", escale.getDateArriveeReelle(),
-                "dateFinTravailSuggeree", arretsTerminaison.isEmpty() ? null : arretsTerminaison.get(0).getDateFin()
-        );
+        Map<String, Object> result = new java.util.HashMap<>();
+        result.put("escale", escale);
+        result.put("commandes", commandes);
+        result.put("tonnageParProduit", tonnageParProduit);
+        result.put("dateDebutTravailSuggeree", escale.getDateArriveeReelle());
+        result.put("dateFinTravailSuggeree", arretsTerminaison.isEmpty() ? null : arretsTerminaison.get(0).getDateFin());
+        return result;
     }
 
     @PostMapping("/{id}/cloturer")
