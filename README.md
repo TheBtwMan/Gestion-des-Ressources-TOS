@@ -55,6 +55,50 @@ npm start
 
 L'application démarre sur `http://localhost:4200`.
 
+## Visualiser la base de données
+
+Recommandé : extension **SQLTools** + **SQLTools PostgreSQL/Cockroach Driver** dans VS Code.
+
+### Paramètres de connexion
+
+| Champ | Valeur |
+|---|---|
+| Connection name | (libre, ex. `Marsa - Gestion des ressources`) |
+| Connect using | Server and Port |
+| Server Address | `localhost` |
+| Port | `5432` |
+| Database | `gestion_ressources` |
+| Username | `marsa` |
+| Password | `marsa` |
+
+### Requêtes utiles pour explorer la base
+
+```sql
+-- Lister toutes les tables
+SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' ORDER BY table_name;
+
+-- Données de référence
+SELECT * FROM ref_personnel;
+SELECT * FROM ref_equipement;
+
+-- Paramétrage
+SELECT * FROM param_equipe;
+SELECT * FROM param_main_theorique;
+
+-- Exploitation (le cœur de l'app)
+SELECT * FROM expl_escale;
+SELECT * FROM expl_commande;
+SELECT * FROM expl_arret;
+SELECT * FROM expl_absence;
+
+-- Administration
+SELECT * FROM admin_utilisateur;
+SELECT * FROM admin_profil;
+```
+
+Alternative sans installer d'extension : `docker exec -it marsa-gestion-ressources-db psql -U marsa -d gestion_ressources`
+puis `\dt` pour lister les tables ou coller directement les requêtes ci-dessus.
+
 ## Stack technique
 
 | Couche | Technologie |

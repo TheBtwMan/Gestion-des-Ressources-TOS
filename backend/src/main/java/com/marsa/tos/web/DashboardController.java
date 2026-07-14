@@ -4,20 +4,30 @@ import com.marsa.tos.common.Enums.StatutEscale;
 import com.marsa.tos.domain.exploitation.Absence;
 import com.marsa.tos.domain.exploitation.Arret;
 import com.marsa.tos.domain.exploitation.Commande;
-import com.marsa.tos.domain.exploitation.CommandeShiftTonnage;
 import com.marsa.tos.domain.exploitation.Escale;
 import com.marsa.tos.domain.referentiel.Personnel;
 import com.marsa.tos.repository.*;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Reporting / dashboard de suivi (objectif final du cadrage de stage) : écarts prévu/réalisé,
  * taux d'absentéisme, arrêts, avancement des escales. Alimenté par les données TOS (mock).
+ * Chaque endpoint accepte les mêmes filtres optionnels : terminal et plage de dates.
  */
 @RestController
 @RequestMapping("/api/dashboard")
@@ -31,11 +41,13 @@ public class DashboardController {
     private final PersonnelRepository personnelRepository;
 
     @GetMapping("/kpis")
-    public Map<String, Object> kpis() {
-        List<Escale> escales = escaleRepository.findAll();
-        List<Commande> commandes = commandeRepository.findAll();
-        List<Arret> arrets = arretRepository.findAll();
-        List<Absence> absences = absenceRepository.findAll();
+    public Map<String, Object> kpis(@RequestParam(required = false) Long terminalId,
+                                     @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateDebut,
+                                     @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateFin) {
+        List<Escale> escales = escalesFiltrees(terminalId, dateDebut, dateFin);
+        List<Commande> commandes = commandesFiltrees(terminalId, dateDebut, dateFin);
+        List<Arret> arrets = arretsFiltres(terminalId, dateDebut, dateFin);
+        List<Absence> absences = absencesFiltrees(terminalId, dateDebut, dateFin);
         long effectifTotal = personnelRepository.count();
 
         long tonnagePrevu = commandes.stream().mapToLong(c -> nz(c.getTonnagePrevu())).sum();
@@ -50,8 +62,10 @@ public class DashboardController {
                 .sum();
         long arretsEnCours = arrets.stream().filter(a -> a.getDateFin() == null).count();
 
-        // Absentéisme approximatif : nb de shifts d'absence déclarés / (effectif * nb de jours de la période mock).
-        int joursPeriode = 14;
+        // Absentéisme approximatif : nb de shifts d'absence déclarés / (effectif * nb de jours de la période).
+        int joursPeriode = dateDebut != null && dateFin != null
+                ? (int) Math.max(1, java.time.temporal.ChronoUnit.DAYS.between(dateDebut, dateFin) + 1)
+                : 14;
         double tauxAbsenteisme = effectifTotal == 0 ? 0
                 : (absences.size() * 100.0) / (effectifTotal * joursPeriode);
 
@@ -72,8 +86,10 @@ public class DashboardController {
     }
 
     @GetMapping("/tonnage-par-trafic")
-    public List<Map<String, Object>> tonnageParTrafic() {
-        List<Commande> commandes = commandeRepository.findAll();
+    public List<Map<String, Object>> tonnageParTrafic(@RequestParam(required = false) Long terminalId,
+                                                        @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateDebut,
+                                                        @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateFin) {
+        List<Commande> commandes = commandesFiltrees(terminalId, dateDebut, dateFin);
         Map<String, List<Commande>> parTrafic = commandes.stream()
                 .collect(Collectors.groupingBy(c -> c.getTrafic().getNom()));
 
@@ -90,14 +106,17 @@ public class DashboardController {
     }
 
     @GetMapping("/absenteisme-par-equipe")
-    public List<Map<String, Object>> absenteismeParEquipe() {
+    public List<Map<String, Object>> absenteismeParEquipe(@RequestParam(required = false) Long terminalId,
+                                                            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateDebut,
+                                                            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateFin) {
         List<Personnel> personnel = personnelRepository.findAll();
-        List<Absence> absences = absenceRepository.findAll();
+        List<Absence> absences = absencesFiltrees(terminalId, dateDebut, dateFin);
         Map<String, Long> absencesParMatricule = absences.stream()
                 .collect(Collectors.groupingBy(a -> a.getPersonnel().getMatricule(), Collectors.counting()));
 
         Map<String, List<Personnel>> parEquipe = personnel.stream()
                 .filter(p -> p.getEquipe() != null)
+                .filter(p -> terminalId == null || terminalId.equals(p.getEquipe().getTerminal().getId()))
                 .collect(Collectors.groupingBy(p -> p.getEquipe().getId()));
 
         return parEquipe.entrySet().stream().map(e -> {
@@ -113,8 +132,10 @@ public class DashboardController {
     }
 
     @GetMapping("/arrets-par-equipement")
-    public List<Map<String, Object>> arretsParEquipement() {
-        List<Arret> arrets = arretRepository.findAll();
+    public List<Map<String, Object>> arretsParEquipement(@RequestParam(required = false) Long terminalId,
+                                                           @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateDebut,
+                                                           @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateFin) {
+        List<Arret> arrets = arretsFiltres(terminalId, dateDebut, dateFin);
         Map<String, List<Arret>> parEquipement = arrets.stream()
                 .filter(a -> a.getEquipement() != null)
                 .collect(Collectors.groupingBy(a -> a.getEquipement().getCode()));
@@ -138,6 +159,100 @@ public class DashboardController {
         return escaleRepository.findByStatut(StatutEscale.EN_COURS);
     }
 
+    /** Export CSV de la liste des commandes (mêmes filtres que le dashboard), pour Excel/LibreOffice. */
+    @GetMapping("/export/commandes.csv")
+    public ResponseEntity<byte[]> exportCommandesCsv(@RequestParam(required = false) Long terminalId,
+                                                      @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateDebut,
+                                                      @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateFin) {
+        List<Commande> commandes = commandesFiltrees(terminalId, dateDebut, dateFin);
+
+        StringBuilder csv = new StringBuilder();
+        csv.append("Numero;Client;Trafic;Sens;Statut;Terminal;Escale;Date travail;Tonnage prevu;Tonnage realise;Ecart %\n");
+        for (Commande c : commandes) {
+            long realise = tonnageRealiseCommande(c);
+            long prevu = nz(c.getTonnagePrevu());
+            double ecart = prevu == 0 ? 0 : Math.round(((realise - prevu) * 1000.0) / prevu) / 10.0;
+            csv.append(csvEscape(c.getNumero())).append(';')
+                    .append(csvEscape(c.getClient())).append(';')
+                    .append(csvEscape(c.getTrafic().getNom())).append(';')
+                    .append(csvEscape(c.getSens().name())).append(';')
+                    .append(csvEscape(c.getStatut().name())).append(';')
+                    .append(csvEscape(c.getEscale() != null ? c.getEscale().getTerminal().getNom() : "")).append(';')
+                    .append(csvEscape(c.getEscale() != null ? c.getEscale().getNavire() : "")).append(';')
+                    .append(csvEscape(String.valueOf(c.getDateTravail()))).append(';')
+                    .append(prevu).append(';')
+                    .append(c.isTonnageRealiseParShift() ? String.valueOf(realise) : "").append(';')
+                    .append(c.isTonnageRealiseParShift() ? String.valueOf(ecart) : "")
+                    .append('\n');
+        }
+        return csvResponse(csv.toString(), "commandes.csv");
+    }
+
+    /** Export CSV du résumé des KPIs affichés sur le dashboard (mêmes filtres). */
+    @GetMapping("/export/kpis.csv")
+    public ResponseEntity<byte[]> exportKpisCsv(@RequestParam(required = false) Long terminalId,
+                                                 @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateDebut,
+                                                 @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateFin) {
+        Map<String, Object> k = kpis(terminalId, dateDebut, dateFin);
+
+        StringBuilder csv = new StringBuilder();
+        csv.append("Indicateur;Valeur\n");
+        for (Map.Entry<String, Object> entry : k.entrySet()) {
+            csv.append(csvEscape(entry.getKey())).append(';').append(csvEscape(String.valueOf(entry.getValue()))).append('\n');
+        }
+        return csvResponse(csv.toString(), "dashboard-kpis.csv");
+    }
+
+    // ---------------------------------------------------------------- Filtrage commun
+
+    private List<Escale> escalesFiltrees(Long terminalId, LocalDate dateDebut, LocalDate dateFin) {
+        return escaleRepository.findAll().stream()
+                .filter(e -> terminalId == null || (e.getTerminal() != null && terminalId.equals(e.getTerminal().getId())))
+                .filter(e -> dansPeriode(e.getDateArriveePrevue() != null ? e.getDateArriveePrevue().toLocalDate() : null, dateDebut, dateFin))
+                .collect(Collectors.toList());
+    }
+
+    private List<Commande> commandesFiltrees(Long terminalId, LocalDate dateDebut, LocalDate dateFin) {
+        return commandeRepository.findAll().stream()
+                .filter(c -> terminalId == null
+                        || (c.getEscale() != null && c.getEscale().getTerminal() != null
+                            && terminalId.equals(c.getEscale().getTerminal().getId())))
+                .filter(c -> dansPeriode(c.getDateTravail(), dateDebut, dateFin))
+                .collect(Collectors.toList());
+    }
+
+    private List<Arret> arretsFiltres(Long terminalId, LocalDate dateDebut, LocalDate dateFin) {
+        return arretRepository.findAll().stream()
+                .filter(a -> terminalId == null
+                        || (a.getEscale() != null && a.getEscale().getTerminal() != null
+                            && terminalId.equals(a.getEscale().getTerminal().getId())))
+                .filter(a -> dansPeriode(a.getDateDebut() != null ? a.getDateDebut().toLocalDate() : null, dateDebut, dateFin))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Filtre par terminal via la chaîne Personnel -> Equipe -> Terminal (le mock n'attache pas
+     * directement une escale/un terminal à une absence).
+     */
+    private List<Absence> absencesFiltrees(Long terminalId, LocalDate dateDebut, LocalDate dateFin) {
+        return absenceRepository.findAll().stream()
+                .filter(a -> terminalId == null
+                        || (a.getPersonnel().getEquipe() != null
+                            && terminalId.equals(a.getPersonnel().getEquipe().getTerminal().getId())))
+                .filter(a -> dansPeriode(a.getDateDebut() != null ? a.getDateDebut().toLocalDate() : null, dateDebut, dateFin))
+                .collect(Collectors.toList());
+    }
+
+    private boolean dansPeriode(LocalDate date, LocalDate dateDebut, LocalDate dateFin) {
+        if (date == null) {
+            return dateDebut == null && dateFin == null;
+        }
+        if (dateDebut != null && date.isBefore(dateDebut)) {
+            return false;
+        }
+        return dateFin == null || !date.isAfter(dateFin);
+    }
+
     private long tonnageRealiseCommande(Commande c) {
         if (c.isTonnageRealiseParShift()) {
             return c.getShifts().stream().mapToLong(s -> nz(s.getTonnageRealise())).sum();
@@ -147,5 +262,26 @@ public class DashboardController {
 
     private long nz(Integer value) {
         return value != null ? value : 0L;
+    }
+
+    private String csvEscape(String value) {
+        if (value == null) {
+            return "";
+        }
+        return value.replace(";", ",").replace("\n", " ").replace("\r", "");
+    }
+
+    private ResponseEntity<byte[]> csvResponse(String csv, String filename) {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        out.writeBytes(new byte[]{(byte) 0xEF, (byte) 0xBB, (byte) 0xBF}); // BOM UTF-8 pour Excel
+        try (PrintWriter writer = new PrintWriter(out, true, StandardCharsets.UTF_8)) {
+            writer.print(csv);
+        }
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentDisposition(ContentDisposition.attachment().filename(filename, StandardCharsets.UTF_8).build());
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentType(MediaType.parseMediaType("text/csv; charset=UTF-8"))
+                .body(out.toByteArray());
     }
 }

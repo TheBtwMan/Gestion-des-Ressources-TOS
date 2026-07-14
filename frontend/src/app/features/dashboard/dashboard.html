@@ -3,8 +3,45 @@
     <h1>Dashboard de suivi</h1>
     <div class="subtitle">Écarts prévisionnel / réalisé, absentéisme, arrêts — Opération Manutention</div>
   </div>
-  <div class="actions">
-    <button class="btn btn-secondary" (click)="refresh()">↻ Actualiser</button>
+  <div class="actions flex-col gap-4" style="align-items:flex-end;">
+    <div class="flex gap-8 items-center">
+      <button class="btn btn-secondary" (click)="refresh()">↻ Actualiser</button>
+      <button class="btn btn-secondary" (click)="exportCsv('commandes')" [disabled]="exporting()">⬇ Export commandes CSV</button>
+      <button class="btn btn-secondary" (click)="exportCsv('kpis')" [disabled]="exporting()">⬇ Export KPIs CSV</button>
+    </div>
+    <div class="text-sm text-muted flex gap-8 items-center">
+      <label class="flex items-center gap-4" style="cursor:pointer;">
+        <input type="checkbox" [checked]="autoRefresh()" (change)="toggleAutoRefresh()" />
+        Auto-actualisation (20s)
+        @if (autoRefresh()) { <span class="badge badge-green">live</span> }
+      </label>
+      <span>Dernière mise à jour : {{ formatTime(lastUpdated()) }}</span>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="field-row" style="align-items:flex-end;">
+    <div class="field">
+      <label>Terminal</label>
+      <select [ngModel]="terminalId()" (ngModelChange)="terminalId.set($event); onFiltersChange()">
+        <option [ngValue]="null">Tous les terminaux</option>
+        @for (t of terminaux(); track t.id) {
+          <option [ngValue]="t.id">{{ t.nom }}</option>
+        }
+      </select>
+    </div>
+    <div class="field">
+      <label>Date début</label>
+      <input type="date" [ngModel]="dateDebut()" (ngModelChange)="dateDebut.set($event); onFiltersChange()" />
+    </div>
+    <div class="field">
+      <label>Date fin</label>
+      <input type="date" [ngModel]="dateFin()" (ngModelChange)="dateFin.set($event); onFiltersChange()" />
+    </div>
+    <div class="field">
+      <button class="btn btn-secondary" (click)="resetFilters()">Réinitialiser</button>
+    </div>
   </div>
 </div>
 
