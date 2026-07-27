@@ -122,4 +122,70 @@ class AbsenceControllerTest extends BaseControllerTest {
 
         verify(absenceRepository, times(1)).deleteById(id);
     }
+
+    @Test
+    @WithMockUser
+    void givenEscaleFilter_whenAll_thenReturnsFilteredAbsences() throws Exception {
+        // Given
+        String escaleId = "ESC-500";
+        Absence abs = new Absence();
+        abs.setId("ABS-FILTERED");
+        abs.setMotif("Congé");
+        when(absenceRepository.findByEscaleId(escaleId)).thenReturn(List.of(abs));
+
+        // When & Then
+        mockMvc.perform(get("/api/exploitation/absences").param("escaleId", escaleId))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].id").value("ABS-FILTERED"))
+                .andExpect(jsonPath("$[0].motif").value("Congé"));
+    }
+
+    @Test
+    @WithMockUser(roles = "AFFECTATION_REELLE")
+    void givenAbsenceWithEscale_whenCreate_thenResolvesEscaleAndSaves() throws Exception {
+        // Given
+        Personnel personnel = new Personnel();
+        personnel.setMatricule("MATR-123");
+
+        Escale escale = new Escale();
+        escale.setId("ESC-500");
+
+        Absence input = new Absence();
+        input.setPersonnel(personnel);
+        input.setEscale(escale);
+        input.setMotif("Formation");
+
+        Absence saved = new Absence();
+        saved.setId("ABS-ESC");
+        saved.setPersonnel(personnel);
+        saved.setEscale(escale);
+        saved.setMotif("Formation");
+
+        when(personnelRepository.findById("MATR-123")).thenReturn(Optional.of(personnel));
+        when(escaleRepository.findById("ESC-500")).thenReturn(Optional.of(escale));
+        when(absenceRepository.save(any(Absence.class))).thenReturn(saved);
+
+        // When & Then
+        mockMvc.perform(post("/api/exploitation/absences")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(input)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value("ABS-ESC"))
+                .andExpect(jsonPath("$.motif").value("Formation"));
+    }
+
+    @Test
+    @WithMockUser(roles = "CONSULTATION")
+    void givenForbiddenRole_whenCreate_thenReturnsForbidden() throws Exception {
+        // Given
+        Absence input = new Absence();
+
+        // When & Then
+        mockMvc.perform(post("/api/exploitation/absences")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(input)))
+                .andExpect(status().isForbidden());
+    }
 }

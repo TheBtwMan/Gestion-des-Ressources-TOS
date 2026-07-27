@@ -1,6 +1,7 @@
 package com.marsa.tos.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.marsa.tos.domain.admin.Droit;
 import com.marsa.tos.domain.admin.Profil;
 import com.marsa.tos.domain.admin.Utilisateur;
 import com.marsa.tos.repository.DroitRepository;
@@ -17,14 +18,14 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -54,8 +55,66 @@ class AdminControllerTest extends BaseControllerTest {
 
     @Test
     @WithMockUser(roles = "GESTION_UTILISATEURS")
+    void whenGetDroits_thenReturnsAllDroits() throws Exception {
+        Droit droit = new Droit();
+        droit.setCode("PARAMETRAGE");
+        droit.setLibelle("Paramétrage");
+        when(droitRepository.findAll()).thenReturn(List.of(droit));
+
+        mockMvc.perform(get("/api/admin/droits"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].code").value("PARAMETRAGE"));
+    }
+
+    @Test
+    @WithMockUser(roles = "GESTION_UTILISATEURS")
+    void whenGetProfils_thenReturnsAllProfils() throws Exception {
+        Profil profil = new Profil();
+        profil.setId(1L);
+        profil.setNom("Super Admin");
+        when(profilRepository.findAll()).thenReturn(List.of(profil));
+
+        mockMvc.perform(get("/api/admin/profils"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].nom").value("Super Admin"));
+    }
+
+    @Test
+    @WithMockUser(roles = "GESTION_UTILISATEURS")
+    void givenValidDroits_whenSetDroits_thenUpdatesAndReturnsProfil() throws Exception {
+        Profil profil = new Profil();
+        profil.setId(1L);
+        profil.setNom("Admin");
+        profil.setDroits(new ArrayList<>());
+
+        Droit droit = new Droit();
+        droit.setCode("PARAMETRAGE");
+
+        when(profilRepository.findById(1L)).thenReturn(Optional.of(profil));
+        when(droitRepository.findAllById(List.of("PARAMETRAGE"))).thenReturn(List.of(droit));
+        when(profilRepository.save(any(Profil.class))).thenReturn(profil);
+
+        mockMvc.perform(put("/api/admin/profils/{id}/droits", 1L)
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(List.of("PARAMETRAGE"))))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @WithMockUser(roles = "GESTION_UTILISATEURS")
+    void givenEmptyDroits_whenSetDroits_thenReturnsBadRequest() throws Exception {
+        mockMvc.perform(put("/api/admin/profils/{id}/droits", 1L)
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(Collections.emptyList())))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value("Un profil doit contenir au moins un droit."));
+    }
+
+    @Test
+    @WithMockUser(roles = "GESTION_UTILISATEURS")
     void givenValidDataAndGestionRole_whenCreateProfil_thenSavesAndReturnsProfil() throws Exception {
-        // Given
         Profil input = new Profil();
         input.setNom("Resp. Equipe");
         input.setDroits(new ArrayList<>());
@@ -67,7 +126,6 @@ class AdminControllerTest extends BaseControllerTest {
 
         when(profilRepository.save(any(Profil.class))).thenReturn(saved);
 
-        // When & Then
         mockMvc.perform(post("/api/admin/profils")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
@@ -80,10 +138,8 @@ class AdminControllerTest extends BaseControllerTest {
     @Test
     @WithMockUser(roles = "ADMIN_PORT")
     void givenAdminPortRole_whenCreateProfil_thenReturnsForbidden() throws Exception {
-        // Given
         Profil input = new Profil();
 
-        // When & Then
         mockMvc.perform(post("/api/admin/profils")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
@@ -92,9 +148,20 @@ class AdminControllerTest extends BaseControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = "GESTION_UTILISATEURS")
+    void whenGetUtilisateurs_thenReturnsAllUtilisateurs() throws Exception {
+        Utilisateur user = new Utilisateur();
+        user.setMatricule("USER001");
+        when(utilisateurRepository.findAll()).thenReturn(List.of(user));
+
+        mockMvc.perform(get("/api/admin/utilisateurs"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].matricule").value("USER001"));
+    }
+
+    @Test
     @WithMockUser(roles = "ADMIN_PORT")
     void givenAdminPortRole_whenCreateUtilisateur_thenSavesAndReturnsUtilisateur() throws Exception {
-        // Given
         AdminController.UtilisateurRequest body = new AdminController.UtilisateurRequest();
         body.matricule = "USER001";
         body.nom = "Nom";
@@ -115,7 +182,6 @@ class AdminControllerTest extends BaseControllerTest {
         when(passwordEncoder.encode(anyString())).thenReturn("hashed");
         when(utilisateurRepository.save(any(Utilisateur.class))).thenReturn(saved);
 
-        // When & Then
         mockMvc.perform(post("/api/admin/utilisateurs")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
@@ -123,5 +189,55 @@ class AdminControllerTest extends BaseControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.matricule").value("USER001"))
                 .andExpect(jsonPath("$.nom").value("Nom"));
+    }
+
+    @Test
+    @WithMockUser(roles = "ADMIN_PORT")
+    void givenNoProfils_whenCreateUtilisateur_thenReturnsBadRequest() throws Exception {
+        AdminController.UtilisateurRequest body = new AdminController.UtilisateurRequest();
+        body.matricule = "USER002";
+        body.profilIds = Collections.emptyList();
+
+        mockMvc.perform(post("/api/admin/utilisateurs")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(body)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value("Un utilisateur doit avoir au moins un profil."));
+    }
+
+    @Test
+    @WithMockUser(roles = "GESTION_UTILISATEURS")
+    void givenValidData_whenUpdateUtilisateur_thenUpdatesAndReturnsUtilisateur() throws Exception {
+        AdminController.UtilisateurRequest body = new AdminController.UtilisateurRequest();
+        body.nom = "NomModifie";
+        body.prenom = "PrenomModifie";
+
+        Utilisateur user = new Utilisateur();
+        user.setMatricule("USER001");
+
+        when(utilisateurRepository.findById("USER001")).thenReturn(Optional.of(user));
+        when(utilisateurRepository.save(any(Utilisateur.class))).thenReturn(user);
+
+        mockMvc.perform(put("/api/admin/utilisateurs/{matricule}", "USER001")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(body)))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @WithMockUser(roles = "GESTION_UTILISATEURS")
+    void givenExistingMatricule_whenDeactivate_thenDeactivatesUser() throws Exception {
+        Utilisateur user = new Utilisateur();
+        user.setMatricule("USER001");
+        user.setActif(true);
+
+        when(utilisateurRepository.findById("USER001")).thenReturn(Optional.of(user));
+        when(utilisateurRepository.save(any(Utilisateur.class))).thenReturn(user);
+
+        mockMvc.perform(delete("/api/admin/utilisateurs/{matricule}", "USER001")
+                        .with(csrf()))
+                .andExpect(status().isOk());
     }
 }

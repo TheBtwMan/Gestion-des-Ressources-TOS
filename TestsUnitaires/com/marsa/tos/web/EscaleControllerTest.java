@@ -2,6 +2,7 @@ package com.marsa.tos.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.marsa.tos.common.Enums.StatutEscale;
+import com.marsa.tos.domain.exploitation.Commande;
 import com.marsa.tos.domain.exploitation.Escale;
 import com.marsa.tos.repository.ArretRepository;
 import com.marsa.tos.repository.CommandeRepository;
@@ -16,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -47,8 +49,32 @@ class EscaleControllerTest extends BaseControllerTest {
 
     @Test
     @WithMockUser
+    void givenNoStatut_whenAll_thenReturnsAllEscales() throws Exception {
+        Escale escale = new Escale();
+        escale.setId("ESC-1");
+        when(escaleRepository.findAll()).thenReturn(List.of(escale));
+
+        mockMvc.perform(get("/api/exploitation/escales"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].id").value("ESC-1"));
+    }
+
+    @Test
+    @WithMockUser
+    void givenStatutFilter_whenAll_thenReturnsFilteredEscales() throws Exception {
+        Escale escale = new Escale();
+        escale.setId("ESC-EN-COURS");
+        escale.setStatut(StatutEscale.EN_COURS);
+        when(escaleRepository.findByStatut(StatutEscale.EN_COURS)).thenReturn(List.of(escale));
+
+        mockMvc.perform(get("/api/exploitation/escales").param("statut", "EN_COURS"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].id").value("ESC-EN-COURS"));
+    }
+
+    @Test
+    @WithMockUser
     void givenExistingEscaleId_whenGet_thenReturnsEscale() throws Exception {
-        // Given
         String escaleId = "ESC-1";
         Escale escale = new Escale();
         escale.setId(escaleId);
@@ -57,7 +83,6 @@ class EscaleControllerTest extends BaseControllerTest {
 
         when(escaleRepository.findById(escaleId)).thenReturn(Optional.of(escale));
 
-        // When & Then
         mockMvc.perform(get("/api/exploitation/escales/{id}", escaleId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(escaleId))
@@ -66,8 +91,28 @@ class EscaleControllerTest extends BaseControllerTest {
 
     @Test
     @WithMockUser
+    void givenNonExistingEscaleId_whenGet_thenReturnsNotFound() throws Exception {
+        when(escaleRepository.findById("ESC-MISSING")).thenReturn(Optional.empty());
+
+        mockMvc.perform(get("/api/exploitation/escales/{id}", "ESC-MISSING"))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @WithMockUser
+    void givenExistingEscale_whenGetCommandes_thenReturnsCommandesList() throws Exception {
+        Commande cmd = new Commande();
+        cmd.setNumero("CMD-1");
+        when(commandeRepository.findByEscaleId("ESC-1")).thenReturn(List.of(cmd));
+
+        mockMvc.perform(get("/api/exploitation/escales/{id}/commandes", "ESC-1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].numero").value("CMD-1"));
+    }
+
+    @Test
+    @WithMockUser
     void givenExistingEscale_whenPreparerCloture_thenReturnsClotureDetails() throws Exception {
-        // Given
         String escaleId = "ESC-1";
         Escale escale = new Escale();
         escale.setId(escaleId);
@@ -77,7 +122,6 @@ class EscaleControllerTest extends BaseControllerTest {
         when(commandeRepository.findByEscaleId(escaleId)).thenReturn(Collections.emptyList());
         when(arretRepository.findByEscaleId(escaleId)).thenReturn(Collections.emptyList());
 
-        // When & Then
         mockMvc.perform(get("/api/exploitation/escales/{id}/cloture", escaleId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.dateDebutTravailSuggeree").value("2026-07-14T10:00:00"));
@@ -86,7 +130,6 @@ class EscaleControllerTest extends BaseControllerTest {
     @Test
     @WithMockUser(roles = "VALIDATION")
     void givenExistingEscaleAndValidationRole_whenCloturer_thenUpdatesToCloturee() throws Exception {
-        // Given
         String escaleId = "ESC-1";
         Escale escale = new Escale();
         escale.setId(escaleId);
@@ -104,7 +147,6 @@ class EscaleControllerTest extends BaseControllerTest {
                 "dateFinTravail", "2026-07-14T18:00:00"
         );
 
-        // When & Then
         mockMvc.perform(post("/api/exploitation/escales/{id}/cloturer", escaleId)
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
@@ -116,11 +158,9 @@ class EscaleControllerTest extends BaseControllerTest {
     @Test
     @WithMockUser(roles = "AFFECTATION_REELLE")
     void givenForbiddenRole_whenCloturer_thenReturnsForbidden() throws Exception {
-        // Given
         String escaleId = "ESC-1";
         Map<String, String> body = Collections.emptyMap();
 
-        // When & Then
         mockMvc.perform(post("/api/exploitation/escales/{id}/cloturer", escaleId)
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
