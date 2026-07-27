@@ -17,12 +17,36 @@ l'opération **Manutention** :
 - **Administration** : Profils/droits, Utilisateurs, Authentification (JWT).
 - **Reporting** : Dashboard (écarts prévu/réalisé, absentéisme, arrêts cumulés).
 
-## Démarrage rapide
+## Démarrage rapide avec Docker (Recommandé)
 
-### 1. Base de données
+Lancez toute l'application (Base de données PostgreSQL, Backend Spring Boot, et Frontend Angular) en une seule commande sans aucune installation préalable (à part Docker) :
 
 ```bash
-docker compose up -d
+docker compose up --build
+```
+
+L'application sera directement accessible :
+- **Frontend Web** : `http://localhost` (ou `http://localhost:4200`)
+- **Backend API** : `http://localhost:8080/api`
+- **PostgreSQL** : `localhost:5432`
+
+Compte d'accès administrateur par défaut :
+- **Matricule** : `ADMIN001`
+- **Mot de passe** : `MarsaMaroc2026!`
+
+Pour arrêter l'application :
+```bash
+docker compose down
+```
+
+---
+
+## Démarrage manuel (Développement)
+
+### 1. Base de données uniquement
+
+```bash
+docker compose up -d postgres
 ```
 
 Démarre PostgreSQL (`gestion_ressources`, user/password `marsa`/`marsa`) sur `localhost:5432`.
